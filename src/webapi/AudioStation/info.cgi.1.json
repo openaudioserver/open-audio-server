@@ -1,0 +1,11 @@
+{
+  "data": {
+    "path": "/webman/3rdparty/AudioStation",
+    "version": {
+      "build": "3377",
+      "major": "6",
+      "minor": "5"
+    }
+  },
+  "success": true
+}

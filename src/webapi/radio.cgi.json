@@ -1,0 +1,191 @@
+{
+  "data": {
+    "offset": 0,
+    "radios": [
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Alternative",
+        "title": "Alternative",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Blues",
+        "title": "Blues",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Classical",
+        "title": "Classical",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Country",
+        "title": "Country",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Decades",
+        "title": "Decades",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Easy Listening",
+        "title": "Easy Listening",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Electronic",
+        "title": "Electronic",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Folk",
+        "title": "Folk",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Hip Hop",
+        "title": "Hip Hop",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Rap",
+        "title": "Rap",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Inspirational",
+        "title": "Inspirational",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_International",
+        "title": "International",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_JPop",
+        "title": "JPop",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Jazz",
+        "title": "Jazz",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Latin",
+        "title": "Latin",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Metal",
+        "title": "Metal",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_New Age",
+        "title": "New Age",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Pop",
+        "title": "Pop",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_R&B",
+        "title": "R&B",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Urban",
+        "title": "Urban",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Reggae",
+        "title": "Reggae",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Rock",
+        "title": "Rock",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Holiday",
+        "title": "Holiday",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Soundtracks",
+        "title": "Soundtracks",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Talk",
+        "title": "Talk",
+        "type": "container",
+        "url": ""
+      },
+      {
+        "desc": "",
+        "id": "SHOUTcast_genre_Themes",
+        "title": "Themes",
+        "type": "container",
+        "url": ""
+      }
+    ],
+    "total": 26
+  },
+  "success": true
+}
