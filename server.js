@@ -3,6 +3,8 @@ const http = require('http')
 const path = require('path')
 const querystring = require('querystring')
 const statCache = {}
+const bufferCache = {}
+
 const server = http.createServer(receiveRequest)
 server.listen(process.env.PORT || 5000, process.env.HOST || 'localhost')
 const library = require('./library.js')
@@ -48,17 +50,20 @@ function executeRequest (req, res, postData, queryData) {
   if (fs.existsSync(sourcePath)) {
     return require(sourcePath)(req, res, postData, queryData)
   }
+  let staticFilePath
   if (urlPart === '/dsaudio') {
     urlPart = 'dsaudio.html'
+    staticFilePath = path.join(__dirname, urlPart)
   } else if (urlPart === '/scan') {
     scanner.start(true)
     return res.end('{ "success": true }')
+  } else if (!process.env.SYNOMAN_PATH) {
+    staticFilePath = path.join(__dirname, urlPart)
   } else {
-    urlPart = `synoman/${urlPart}`
+    staticFilePath = path.join(process.env.SYNOMAN_PATH, urlPart)
   }
-  const wwwFilePath = path.join(__dirname, urlPart)
-  if (fs.existsSync(wwwFilePath)) {
-    const stat = statCache[wwwFilePath] = statCache[wwwFilePath] || fs.statSync(wwwFilePath)
+  if (fs.existsSync(staticFilePath)) {
+    const stat = statCache[staticFilePath] = statCache[staticFilePath] || fs.statSync(staticFilePath)
     if (!stat.isDirectory()) {
       if (urlPart.endsWith('.html')) {
         res.setHeader('content-type', 'text/html')
@@ -69,7 +74,7 @@ function executeRequest (req, res, postData, queryData) {
       } else if (urlPart.endsWith('.js')) {
         res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
       }
-      let buffer = fs.readFileSync(wwwFilePath)
+      let buffer = bufferCache[staticFilePath] = bufferCache[staticFilePath] || fs.readFileSync(staticFilePath)
       if (urlPart === 'dsaudio.html' && process.env.THEME_PATH) {
         const newCSS = fs.readFileSync(process.env.THEME_PATH)
         const newHTML = buffer.toString().replace('</head>', `<style>${newCSS}</style></head>`)

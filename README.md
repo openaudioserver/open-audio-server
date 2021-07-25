@@ -57,6 +57,10 @@ The CACHE_PATH setting is a folder for storing some JSON files containing your s
 
     $ export CACHE_PATH=/path/to/cache
 
+The SYNOMAN_PATH setting is where you stored Synology's web interface files:
+
+    $ export SYNOMAN_PATH=/path/to/synoman
+
 The HOST is the network interface to listen on, probably your WIFI IP address.  If you do not specify it the server will only be accessible on your computer at `http://localhost:5000`.  If you specify your IP address (or `0.0.0.0` for all network connections) the DS Audio mobile apps and web browsers will be able to access your library at your IP address:
 
     $ export HOST=0.0.0.0
@@ -115,7 +119,7 @@ DS Audio mobile and television apps can be downloaded from the App Store, Play S
 
 When you open the apps, instead of the Synology server address you enter your computer's IP address on your home network.  There are no "user accounts" so it doesn't matter what you put in the username and password field.
 
-## Setting up the web interface
+## Optionally setting up the web interface
 
 If you would like to use the web interface from Synology you will need to copy some files from your NAS.  These files cannot be distributed with the Open Audio Server project because they are copyright Synology.
 
