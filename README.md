@@ -135,9 +135,9 @@ When you open the apps, instead of the Synology server address you enter your co
 
 ## Optionally setting up the web interface
 
-If you would like to use the web interface from Synology you will need to copy some files from your NAS or an Xpenology virtual machine.  These files cannot be distributed with the Open Audio Server project because they are copyright Synology.
+If you would like to use the web interface from Synology you will need to copy some files from DSM, the operating system running on your Synology NAS (or an Xpenology virtual machine).  These files cannot be distributed with the Open Audio Server project because they are copyright Synology.
 
-The folder we are copying is `/usr/syno/synoman`, within it is the HTML, CSS and JavaScript files for the Audio Station web interface, along with Synology's libraries for DSM.  To use "scp" you may need to temporarily enable SSH in your Synology under Control panel -> Terminal & SNMP.
+The folder we are copying is `/usr/syno/synoman`, within it is the HTML, CSS and JavaScript files for the Audio Station web interface, along with Synology's libraries for DSM.  To use "scp" you may need to temporarily enable SSH in DSM under Control Panel -> Terminal & SNMP.
 
     $ scp -r administrator@1.2.3.4:/usr/syno/synoman/ /some/where
 
