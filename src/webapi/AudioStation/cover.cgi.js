@@ -2,7 +2,7 @@ const fs = require('fs')
 const library = require('../../../library.js')
 const path = require('path')
 const MusicMetaData = require('music-metadata')
-const defaultImage = fs.readFileSync(path.join(__dirname, '../../../synoman/webman/modules/AudioPlayer/images/2x/audio_player_default_album.png'))
+const defaultImage = fs.readFileSync(path.join(process.env.SYNOMAN_PATH, '/webman/modules/AudioPlayer/images/2x/audio_player_default_album.png'))
 const cache = {}
 
 module.exports = async (_, res, _2, queryData) => {
@@ -24,7 +24,7 @@ module.exports = async (_, res, _2, queryData) => {
       }
     }
     if (!song) {
-      const imagePath = path.join(__dirname, '../../../synoman/webman/3rdparty/AudioStation/images/_2x/audio_default_songs.png')
+      const imagePath = path.join(process.env.SYNOMAN_PATH, '/webman/3rdparty/AudioStation/images/_2x/audio_default_songs.png')
       if (fs.existsSync(imagePath)) {
         cache[imagePath] = {
           format: 'image/png',
@@ -44,7 +44,7 @@ module.exports = async (_, res, _2, queryData) => {
       return res.end(metaData.common.picture[0].data)
     }
     if (queryData.output_default) {
-      const imagePath = path.join(__dirname, '../../../synoman/webman/3rdparty/AudioStation/images/_2x/audio_default_songs.png')
+      const imagePath = path.join(process.env.SYNOMAN_PATH, '/webman/3rdparty/AudioStation/images/_2x/audio_default_songs.png')
       if (fs.existsSync(imagePath)) {
         cache[imagePath] = {
           format: 'image/png',
@@ -135,7 +135,7 @@ module.exports = async (_, res, _2, queryData) => {
     }
   }
   if (queryData.default_genre_name) {
-    const imagePath = path.join(__dirname, `../../../synoman/webman/3rdparty/AudioStation/images/_2x/cover_${queryData.default_genre_name.toLowerCase()}.png`)
+    const imagePath = path.join(process.env.SYNOMAN_PATH, `/webman/3rdparty/AudioStation/images/_2x/cover_${queryData.default_genre_name.toLowerCase()}.png`)
     if (fs.existsSync(imagePath)) {
       cache[imagePath] = {
         format: 'image/png',

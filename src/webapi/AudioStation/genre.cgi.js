@@ -12,7 +12,7 @@ module.exports = (_, res, postData) => {
       success: true
     }
     for (const genre of library.genres) {
-      const imagePath = path.join(__dirname, `../../../synoman/webman/3rdparty/AudioStation/images/_2x/cover_${genre.name.toLowerCase()}.png`)
+      const imagePath = path.join(process.env.SYNOMAN_PATH, `/webman/3rdparty/AudioStation/images/_2x/cover_${genre.name.toLowerCase()}.png`)
       if (fs.existsSync(imagePath)) {
         genreResponse.data.default_genres.push(genre)
       }
