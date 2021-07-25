@@ -83,5 +83,26 @@ function executeRequest (req, res, postData, queryData) {
       return res.end(buffer)
     }
   }
+  // files embeded in themes:
+  // /path/to/theme-folder/theme.css containing "background: url(image.png)"
+  // is mapped to the web request "/image.png"
+  // is mapped to the file request "/path/to/theme-folder/image.png"
+  if (process.env.THEME_PATH) {
+    const themeFolder = process.env.THEME_PATH.substring(0, process.env.THEME_PATH.lastIndexOf('/'))
+    const themeFile = path.join(themeFolder, urlPart)
+    if (fs.existsSync(themeFile)) {
+      if (urlPart.endsWith('.html')) {
+        res.setHeader('content-type', 'text/html')
+      } else if (urlPart.endsWith('.css')) {
+        res.setHeader('content-type', 'text/css')
+      } else if (urlPart.endsWith('.png')) {
+        res.setHeader('content-type', 'image/png')
+      } else if (urlPart.endsWith('.js')) {
+        res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
+      }
+      const buffer = bufferCache[staticFilePath] = bufferCache[staticFilePath] || fs.readFileSync(staticFilePath)
+      return res.end(buffer)
+    }
+  }
   return res.end()
 }
