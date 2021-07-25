@@ -135,9 +135,9 @@ When you open the apps, instead of the Synology server address you enter your co
 
 ## Optionally setting up the web interface
 
-If you would like to use the web interface from Synology you will need to copy some files from your NAS.  These files cannot be distributed with the Open Audio Server project because they are copyright Synology.
+If you would like to use the web interface from Synology you will need to copy some files from your NAS or an Xpenology virtual machine.  These files cannot be distributed with the Open Audio Server project because they are copyright Synology.
 
-The folder we are copying is `/usr/syno/synoman`, within it is the HTML, CSS and JavaScript files for the DS Audio web interface, along with Synology's various libraries for DSM that DS Audio depends on.  To use "scp" you may need to temporarily enable SSH in your Synology under Control panel -> Terminal & SNMP.
+The folder we are copying is `/usr/syno/synoman`, within it is the HTML, CSS and JavaScript files for the Audio Station web interface, along with Synology's libraries for DSM.  To use "scp" you may need to temporarily enable SSH in your Synology under Control panel -> Terminal & SNMP.
 
     $ scp -r administrator@1.2.3.4:/usr/syno/synoman/ /some/where
 
@@ -145,13 +145,7 @@ Update our configuration variable for SYNOMAN_PATH:
 
     $ export SYNOMAN_PATH=/some/where
 
-Finally, you will need to open DS Audio in your web browser, you can do this by right clicking the icon in DSM and selecting launch in new window.  Once open find your browser setting to "View source" and save all the text into `dsaudio.html`.
-
-    1) Open real `Audio Station` on a Synology or Xpenology occupying a full browser-tab
-    2) View the page source in Firefox, Safari, Chrome or web browser
-    3) Save the HTML text as `dsaudio.html`
-
-Update our configuration variable for SYNOMAN_PATH:
+Finally, you will need to open Audio Station in your web browser occupying its own tab, you can do this by right clicking the icon in DSM and selecting launch in new window.  When Audio Station is open find your browser setting to "View source" and save all the text into `dsaudio.html`.  Then update your configuration variable:
 
     $ export DSAUDIO_HTML_PATH=/path/to/your/dsaudio.html
 
