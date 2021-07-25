@@ -54,7 +54,7 @@ function executeRequest (req, res, postData, queryData) {
   let staticFilePath
   if (urlPart === '/dsaudio') {
     urlPart = 'dsaudio.html'
-    staticFilePath = path.join(__dirname, urlPart)
+    staticFilePath = process.env.DSAUDIO_HTML_PATH
   } else if (urlPart === '/scan') {
     scanner.start(true)
     return res.end('{ "success": true }')

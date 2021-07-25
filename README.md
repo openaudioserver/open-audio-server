@@ -61,6 +61,10 @@ The SYNOMAN_PATH setting is where you optionally-copied Synology's files to use 
 
     $ export SYNOMAN_PATH=/path/to/synoman
 
+The DSAUDIO_HTML_PATH setting is where you optionally-saved the HTML for Audio Station's web interface:
+
+    $ export DSAUDIO_HTML_PATH=/path/to/dsaudio.html
+
 The HOST is the network interface to listen on, probably your WIFI IP address.  If you do not specify it the server will only be accessible on your computer at `http://localhost:5000`.  If you specify your IP address (or `0.0.0.0` for all network connections) the DS Audio mobile apps and web browsers will be able to access your library at your IP address:
 
     $ export HOST=0.0.0.0
@@ -133,9 +137,13 @@ Update our configuration variable for SYNOMAN_PATH:
 
 Finally, you will need to open DS Audio in your web browser, you can do this by right clicking the icon in DSM and selecting launch in new window.  Once open find your browser setting to "View source" and save all the text into `dsaudio.html`.
 
-    1) Open `DS Audio` occupying a full browser-tab
-    2) View source in Firefox, Safari, Chrome or web browser
-    3) Save HTML text as `dsaudio.html`
+    1) Open real `Audio Station` on a Synology or Xpenology occupying a full browser-tab
+    2) View the page source in Firefox, Safari, Chrome or web browser
+    3) Save the HTML text as `dsaudio.html`
+
+Update our configuration variable for SYNOMAN_PATH:
+
+    $ export DSAUDIO_HTML_PATH=/path/to/your/dsaudio.html
 
 Once you have set up the HTML page and "synoman" folder you can open the web app in your browser:
 
