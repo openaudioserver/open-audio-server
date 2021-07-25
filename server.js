@@ -13,6 +13,10 @@ const scanner = require('./scanner.js')
 scanner.start()
 
 function receiveRequest (req, res) {
+  if (req.url === '/scan') {
+    scanner.start(true)
+    return res.end('Scanning music library at ' + process.env.MUSIC_PATH)
+  }
   if (!req.headers.cookie || req.headers.cookie.indexOf('smid=') === -1) {
     res.setHeader('set-cookie', 'smid=E9GRXinHCOWZrGINa_VJPiuzMjMWLwkXyJCJT8z_pZ7KZ8Jf7vdLq9vxSf4zpJ7lQAWaO6WOHOZYkVfAnziPPg; stay_login=1; id=ap0hulniOX5f.1130LWN011720')
   }
@@ -55,9 +59,6 @@ function executeRequest (req, res, postData, queryData) {
   if (urlPart === '/dsaudio') {
     urlPart = 'dsaudio.html'
     staticFilePath = process.env.DSAUDIO_HTML_PATH
-  } else if (urlPart === '/scan') {
-    scanner.start(true)
-    return res.end('{ "success": true }')
   } else if (!process.env.SYNOMAN_PATH) {
     staticFilePath = path.join(__dirname, urlPart)
   } else {
