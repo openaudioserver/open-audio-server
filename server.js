@@ -41,6 +41,7 @@ function receiveRequest (req, res) {
 }
 
 function executeRequest (req, res, postData, queryData) {
+  res.statusCode = 200
   const urlParts = req.url.split('?')
   let urlPart = urlParts[0]
   if (urlPart.indexOf('.cgi/') > -1) {
