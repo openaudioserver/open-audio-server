@@ -46,10 +46,10 @@ You can use Docker to install the server.  There is more work to be done on the 
     $ docker run \
         --name open-audio-server \
         --device /dev/snd:/dev/snd \
-        -v /home/open-dsaudio/music/music:/data/music \
-        -v /home/open-dsaudio/music/music:/data/cache \
-        -v /home/open-dsaudio/music/synoman:/data/synoman \
-        -v /home/open-dsaudio/music/synohtml:/data/html \
+        -v /path/to/music:/data/music \
+        -v /path/to/music:/data/cache \
+        -v /path/to/synoman:/data/synoman \
+        -v /path/to/synohtml:/data/html \
         -p 5000:5000 \
         openaudioserver/open-audio-server
 
