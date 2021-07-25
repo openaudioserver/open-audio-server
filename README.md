@@ -57,7 +57,7 @@ The CACHE_PATH setting is a folder for storing some JSON files containing your s
 
     $ export CACHE_PATH=/path/to/cache
 
-The SYNOMAN_PATH setting is where you stored Synology's web interface files:
+The SYNOMAN_PATH setting is where you optionally-copied Synology's files to use Audio Station in web browsers (details further down):
 
     $ export SYNOMAN_PATH=/path/to/synoman
 
@@ -123,9 +123,13 @@ When you open the apps, instead of the Synology server address you enter your co
 
 If you would like to use the web interface from Synology you will need to copy some files from your NAS.  These files cannot be distributed with the Open Audio Server project because they are copyright Synology.
 
-The folder we are copying is `/user/syno/synoman`, within it is the HTML, CSS and JavaScript files for the DS Audio web interface, along with Synology's various libraries for DSM that DS Audio depends on.  To use "scp" you may need to temporarily enable SSH in your Synology under Control panel -> Terminal & SNMP.
+The folder we are copying is `/usr/syno/synoman`, within it is the HTML, CSS and JavaScript files for the DS Audio web interface, along with Synology's various libraries for DSM that DS Audio depends on.  To use "scp" you may need to temporarily enable SSH in your Synology under Control panel -> Terminal & SNMP.
 
-    $ scp -r administrator@1.2.3.4:/usr/syno/synoman/ .
+    $ scp -r administrator@1.2.3.4:/usr/syno/synoman/ /some/where
+
+Update our configuration variable for SYNOMAN_PATH:
+
+    $ export SYNOMAN_PATH=/some/where
 
 Finally, you will need to open DS Audio in your web browser, you can do this by right clicking the icon in DSM and selecting launch in new window.  Once open find your browser setting to "View source" and save all the text into `dsaudio.html`.
 
