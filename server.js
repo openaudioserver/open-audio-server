@@ -105,5 +105,6 @@ function executeRequest (req, res, postData, queryData) {
       return res.end(buffer)
     }
   }
+  res.statusCode = 404
   return res.end()
 }
