@@ -83,7 +83,7 @@ The PORT is a number that divides your IP address into thousands of different ad
 
     $ export PORT=5000
 
-The GZIP setting will compress your song and any other date very effectively, 1000 songs requires very roughly 500 kilobytes of JSON data that GZIP can compress to 50 kilobytes.  The reduction in file size means your library reads and updates much faster if it is a very large library on slow storage.
+The GZIP setting will compress your song and any other data very effectively, 1000 songs requires very roughly 500 kilobytes of JSON data that GZIP can compress to 50 kilobytes.  The reduction in file size means your library reads and updates much faster if it is a very large library on slow storage.
 
     $ export GZIP=true
 
