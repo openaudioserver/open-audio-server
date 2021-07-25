@@ -2,12 +2,17 @@
   "name": "open-audio-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/openaudioserver/open-audio-server"
   },
-  "author": "",
-  "license": "ISC",
+  "author": { 
+    "name" : "openaudioserver",
+    "email" : "openaudioserver@protonmail.com", 
+    "url" : "http://github.com/openaudioserver"
+  },
+  "license": "MIT",
   "dependencies": {
     "icecast-parser": "^4.0.2",
     "music-metadata": "^7.8.8",
