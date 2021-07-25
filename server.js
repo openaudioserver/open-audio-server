@@ -77,9 +77,11 @@ function executeRequest (req, res, postData, queryData) {
       }
       let buffer = bufferCache[staticFilePath] = bufferCache[staticFilePath] || fs.readFileSync(staticFilePath)
       if (urlPart === 'dsaudio.html' && process.env.THEME_PATH && fs.existsSync(process.env.THEME_PATH)) {
-        const newCSS = fs.readFileSync(process.env.THEME_PATH)
-        const newHTML = buffer.toString().replace('</head>', `<style>${newCSS}</style></head>`)
-        buffer = Buffer.from(newHTML)
+        const newCSS = fs.readFileSync(process.env.THEME_PATH).toString()
+        if (newCSS && newCSS.length) {
+          const newHTML = buffer.toString().replace('</head>', `<style>${newCSS}</style></head>`)
+          buffer = Buffer.from(newHTML)
+        }
       }
       return res.end(buffer)
     }
