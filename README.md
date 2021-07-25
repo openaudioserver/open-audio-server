@@ -41,7 +41,17 @@ Aside from user accounts the goal is for complete compatibility.  Although incom
 
 ## Installing Open Audio Server
 
-First make sure you install NodeJS at least the "lts" version, then download the project from Github:
+You can use Docker to install the server.  There is more work to be done on the docker image to support remote playback and if neccessary an image for ARM too.
+
+    $ docker run --name open-audio-server 
+         -v /home/user/music:/data/music 
+         -v /home/user/music:/data/cache 
+         -v /home/user/synoman:/data/synoman 
+         -v /home/user/synohtml:/data/html 
+         -p 5000:5000 
+         openaudioserver/open-audio-server
+
+You can install the server from the repository.  First make sure you install NodeJS at least the "lts" version, then download the project from Github:
 
     $ git clone https://github.com/openaudioserver/open-audio-server
 
