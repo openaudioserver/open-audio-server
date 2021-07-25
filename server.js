@@ -76,7 +76,7 @@ function executeRequest (req, res, postData, queryData) {
         res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
       }
       let buffer = bufferCache[staticFilePath] = bufferCache[staticFilePath] || fs.readFileSync(staticFilePath)
-      if (urlPart === 'dsaudio.html' && process.env.THEME_PATH) {
+      if (urlPart === 'dsaudio.html' && process.env.THEME_PATH && fs.existsSync(process.env.THEME_PATH)) {
         const newCSS = fs.readFileSync(process.env.THEME_PATH)
         const newHTML = buffer.toString().replace('</head>', `<style>${newCSS}</style></head>`)
         buffer = Buffer.from(newHTML)
