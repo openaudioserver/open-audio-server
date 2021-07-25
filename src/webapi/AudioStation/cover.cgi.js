@@ -2,7 +2,6 @@ const fs = require('fs')
 const library = require('../../../library.js')
 const path = require('path')
 const MusicMetaData = require('music-metadata')
-const defaultImage = fs.readFileSync(path.join(process.env.SYNOMAN_PATH, '/webman/modules/AudioPlayer/images/2x/audio_player_default_album.png'))
 const cache = {}
 
 module.exports = async (_, res, _2, queryData) => {
@@ -33,7 +32,7 @@ module.exports = async (_, res, _2, queryData) => {
         res.setHeader('content-type', cache[imagePath].format)
         return res.end(cache[imagePath].data)
       }
-    }    
+    }
     if (song.hasImage) {
       const metaData = await MusicMetaData.parseFile(song.path)
       cache[queryData.id] = {
@@ -146,5 +145,6 @@ module.exports = async (_, res, _2, queryData) => {
     }
   }
   res.setHeader('content-type', 'image/png')
+  const defaultImage = cache.defaultImage = cache.defaultImage || fs.readFileSync(path.join(process.env.SYNOMAN_PATH, '/webman/modules/AudioPlayer/images/2x/audio_player_default_album.png'))
   return res.end(defaultImage)
 }
