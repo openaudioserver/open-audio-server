@@ -103,7 +103,7 @@ function executeRequest (req, res, postData, queryData) {
     staticFilePath = path.join(process.env.SYNOMAN_PATH, urlPart)
   }
   const staticFilePathExists = existsCache[staticFilePath] = existsCache[staticFilePath] || fs.existsSync(staticFilePath)
-  if (fs.existsSync(staticFilePathExists)) {
+  if (staticFilePathExists) {
     const stat = statCache[staticFilePath] = statCache[staticFilePath] || fs.statSync(staticFilePath)
     if (!stat.isDirectory()) {
       if (urlPart.endsWith('.html')) {
@@ -116,11 +116,15 @@ function executeRequest (req, res, postData, queryData) {
         res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
       }
       let buffer = bufferCache[staticFilePath] = bufferCache[staticFilePath] || fs.readFileSync(staticFilePath)
-      if (urlPart === 'dsaudio.html' && process.env.THEME_PATH && fs.existsSync(process.env.THEME_PATH)) {
-        const newCSS = fs.readFileSync(process.env.THEME_PATH).toString()
-        if (newCSS && newCSS.length) {
-          const newHTML = buffer.toString().replace('</head>', `<style>${newCSS}</style></head>`)
-          buffer = Buffer.from(newHTML)
+      if (urlPart === 'dsaudio.html' && process.env.THEME_PATH) {
+        const themeFilePath = process.env.THEME_PATH
+        const themeFilePathExists = existsCache[themeFilePath] = existsCache[themeFilePath] || fs.existsSync(themeFilePath)
+        if (themeFilePathExists) {
+          const newCSS = fs.readFileSync(process.env.THEME_PATH).toString()
+          if (newCSS && newCSS.length) {
+            const newHTML = buffer.toString().replace('</head>', `<style>${newCSS}</style></head>`)
+            buffer = Buffer.from(newHTML)
+          }
         }
       }
       return res.end(buffer)
