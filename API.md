@@ -40,9 +40,8 @@ The Synology API for Audio Station is a combination of routes from Synology's DS
 
 ### Retrieve tag information
 
-    POST {
-      action: 'load',
-    }
+    POST
+    action=load
 
     RESPONSE {
       files: [{
@@ -66,24 +65,23 @@ The Synology API for Audio Station is a combination of routes from Synology's DS
 
 ### Update tag information
 
-    POST {
-      action: 'apply',
-      data: {
-        audioInfos: [{
-          path
-        }],
-        album,
-        artist,
-        composer,
-        genre,
-        path,
-        album_artist,
-        comment,
-        title,
-        track,
-        year,
-        disc
-      }
+    POST
+    action=apply&
+    data=<string of json> {
+      audioInfos: [{
+        path
+      }],
+      album,
+      artist,
+      composer,
+      genre,
+      path,
+      album_artist,
+      comment,
+      title,
+      track,
+      year,
+      disc
     }
 
     RESPONSE {
@@ -115,16 +113,15 @@ This URL is paginated, sortable, and filters results with optional field(s).
 
 ### Retrieves list of albums
 
-    POST {
-      composer,
-      artist,
-      genre,
-      keyword,
-      sort_by
-      sort_description,
-      offset,
-      limit
-    }
+    POST
+    composer=
+    &artist=
+    &genre=
+    &keyword=
+    &sort_by=
+    &sort_description=
+    &offset=
+    &limit=
 
     RESPONSE {
       data: {
@@ -152,14 +149,13 @@ This URL is paginated, sortable, and filters results with optional field(s).
 
 ### Retrieves list of albums
 
-    POST {
-      genre,
-      keyword,
-      sort_by
-      sort_description,
-      offset,
-      limit
-    }
+    POST
+    genre=
+    &keyword=
+    &sort_b=
+    &sort_description=
+    &offset=
+    &limit=
 
     RESPONSE {
       data: {
@@ -181,14 +177,13 @@ This URL is paginated, sortable, and filters results with optional field(s).
 
 ### Retrieves list of composers
 
-    POST {
-      genre,
-      keyword,
-      sort_by
-      sort_description,
-      offset,
-      limit
-    }
+    POST
+    genre=
+    &keyword=
+    &sort_by=
+    &sort_description=
+    &offset=
+    &limit=
 
     RESPONSE {
       data: {
@@ -211,14 +206,13 @@ This URL is paginated, sortable, and filters results with optional field(s).
 
 ### Retrieves list of genres
 
-    POST {
-      genre,
-      keyword,
-      sort_by
-      sort_description,
-      offset,
-      limit
-    }
+    POST 
+    genre=
+    &keyword=
+    &sort_by=
+    &sort_description=
+    &offset=
+    &limit
 
     RESPONSE {
       data: {
