@@ -345,6 +345,9 @@ async function load () {
 }
 
 async function rewriteSongList () {
+  if (!process.env.CACHE_PATH) {
+    return
+  }
   const songList = JSON.parse(JSON.stringify(songs))
   for (const song of songList) {
     delete (song.id)
@@ -375,6 +378,9 @@ async function rewriteSongList () {
 }
 
 async function rewriteRatings () {
+  if (!process.env.CACHE_PATH) {
+    return
+  }
   for (const song of songs) {
     if (song.additional.song_rating.rating > 0) {
       songRatings[song.path] = song.additional.song_rating.rating
@@ -387,6 +393,9 @@ async function rewriteRatings () {
 }
 
 async function rewriteEdits () {
+  if (!process.env.CACHE_PATH) {
+    return
+  }
   const dataCachePath = path.join(process.env.CACHE_PATH, process.env.GZIP ? 'edits.json.gzip' : 'edits.json')
   const gzipAsync = util.promisify(zlib.gzip)
   const compressedData = await gzipAsync(JSON.stringify(songEdits))
@@ -410,6 +419,9 @@ async function rewriteFavoriteRadios () {
 }
 
 async function rewrite (name, array) {
+  if (!process.env.CACHE_PATH) {
+    return
+  }
   const dataCachePath = path.join(process.env.CACHE_PATH, process.env.GZIP ? `${name}.json.gzip` : `${name}.json`)
   const gzipAsync = util.promisify(zlib.gzip)
   const compressedData = await gzipAsync(JSON.stringify(array))
