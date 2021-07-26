@@ -66,7 +66,7 @@ function receiveRequest (req, res) {
   const urlParts = req.url.split('?')
   const queryData = querystring.parse(urlParts[1])
   if (req.method === 'GET') {
-    console.log('[request]', req.method, urlParts[0], 'query=', queryData ? Object.keys(queryData.join(',')) : ' ')
+    console.log('[request]', req.method, urlParts[0], 'query=', queryData ? Object.keys(queryData).join(',') : ' ')
     return executeRequest(req, res, {}, queryData)
   } else {
     let rawData = ''
@@ -75,7 +75,7 @@ function receiveRequest (req, res) {
     })
     req.on('end', () => {
       const postData = querystring.decode(rawData)
-      console.log('[request]', req.method, urlParts[0], 'query=', queryData ? Object.keys(queryData.join(',')) : ' ', 'posted=', postData ? Object.keys(postData).join(',') : ' ')
+      console.log('[request]', req.method, urlParts[0], 'query=', queryData ? Object.keys(queryData).join(',') : ' ', 'posted=', postData ? Object.keys(postData).join(',') : ' ')
       return executeRequest(req, res, postData, queryData)
     })
   }
