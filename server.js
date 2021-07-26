@@ -46,10 +46,22 @@ function receiveRequest (req, res) {
     res.setHeader('set-cookie', 'smid=E9GRXinHCOWZrGINa_VJPiuzMjMWLwkXyJCJT8z_pZ7KZ8Jf7vdLq9vxSf4zpJ7lQAWaO6WOHOZYkVfAnziPPg; stay_login=1; id=ap0hulniOX5f.1130LWN011720')
   }
   if (req.url === '/') {
-    res.writeHead(302, {
-      location: '/dsaudio?launchApp=SYNO.SDS.AudioStation.Application'
-    })
-    return res.end()
+    const dsAudioHTMLPath = process.env.DSAUDIO_HTML_PATH
+    const dsAudioHTMLPathExists = existsCache[dsAudioHTMLPath] = existsCache[dsAudioHTMLPath] || (dsAudioHTMLPath && fs.existsSync(dsAudioHTMLPath))
+    if (dsAudioHTMLPathExists) {
+      res.writeHead(302, {
+        location: '/dsaudio?launchApp=SYNO.SDS.AudioStation.Application'
+      })
+      return res.end()
+    } else {
+      const setupFilePath = path.join(__dirname, 'setup.html')
+      const setupFilePathExists = existsCache[setupFilePath] = existsCache[setupFilePath] || (dsAudioHTMLPath && fs.existsSync(setupFilePath))
+      if (setupFilePathExists) {
+        const buffer = bufferCache[setupFilePath] = bufferCache[setupFilePath] || fs.readFileSync(setupFilePath)
+        res.setHeader('content-type', 'text/html')
+        return res.end(buffer)
+      }
+    }
   }
   const urlParts = req.url.split('?')
   const queryData = querystring.parse(urlParts[1])

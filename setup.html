@@ -1,0 +1,40 @@
+<html>
+  <head>
+    <title>Welcome to Open Audio Server</title>
+  </head>
+  <body>
+    <h1>Open Audio Server</h1>
+    <p>Your server is running but the Audio Station web interface has not loaded so you can currently only use the iPhone and Android apps to access the server</p>
+    <ul>
+      <li>
+        <h2>Android</h2>
+        <p>Download the DS Audio app from:</p>
+        <ul>
+          <li><a href="https://www.synology.com/en-us/support/download/DS920+#androids">Synology Download Center</a></li>
+          <li><a href="https://play.google.com/store/apps/details?id=com.synology.DSaudio">Play Store</a></li>
+        </ul>
+      </li>
+      <li>
+        <h2>iOS</h2>
+        <p>Download the DS Audio app from:</p>
+        <ul>
+          <li><a href="https://apps.apple.com/us/app/ds-audio/id321495303">iOS App Store</a></li>
+        </ul>
+      </li>
+      <li>
+        <h2>Web</h2>
+        <p>Audio Station's web interface requires files copyrighted to Synology that cannot be distributed with Open Audio Server.</p>
+        <p>To copy these files requires either a Synology NAS or an Xpenology virtual machine running Synology DSM.  There are premade Xpenology virtual machines for VMWare Workstation (paid) and VMWare Player (free) and guides on how to install in your own virtual machine but you have to find them yourself.</p>
+        <p>Once you have DSM running, either way, Audio Station must be installed from the "Package Manager", and SSH must be enabled in the "Control Panel" under "Terminal & SNMP".</p>
+        <p><pre>scp -r administrator@1.2.3.4:/usr/syno/synoman/ /some/where</pre></p>
+        <p>Then open Audio Station in your web browser by right clicking the icon in DSM and selecting launch in new window.</p>
+        <p>Find your browser setting to "View source" and save all the text into `dsaudio.html`.</p>
+        <p>Update your server settings</p>
+        <ul>
+          <li><pre>$ export SYNOMAN_PATH=/some/where/synoman</pre></li>
+          <li><pre>$ export DSAUDIO_HTML_PATH=/some/where/dsaudio.html</pre></li>
+        </ul>
+      </li>
+    </ul>
+  </body>
+</html>
