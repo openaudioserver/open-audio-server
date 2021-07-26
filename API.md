@@ -128,17 +128,17 @@ This URL is paginated, sortable, and filters results with optional field(s).
     RESPONSE {
       data: {
         albums: [{
-        album_artist,
-        artist,
-        display_artist,
-        created,
-        path,
-        name,
-        title,
-        year,
-        additional: {
-          rating
-        }
+          album_artist,
+          artist,
+          display_artist,
+          created,
+          path,
+          name,
+          title,
+          year,
+          additional: {
+            rating
+          }
         }]
         offset
       },
