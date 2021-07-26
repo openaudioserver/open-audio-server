@@ -6,12 +6,10 @@ const library = require('../../../library.js')
 module.exports = (req, res, postData, queryData) => {
   res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
   if (queryData.method === 'getsonginfo') {
-    console.log('getting song info')
     const streamid = queryData.stream_id
     const url = library.radioStreams[streamid].newURL
     const station = new iceCast.Parser({ url, autoUpdate: false })
     return station.on('metadata', (metaData) => {
-      console.log(metaData)
       if (metaData) {
         return res.end(JSON.stringify({ data: { title: metaData.get('StreamTitle') }, success: true }))
       } else {
@@ -20,12 +18,9 @@ module.exports = (req, res, postData, queryData) => {
     })
   } else if (queryData.method === 'stream') {
     const stream = library.radioStreams[queryData.stream_id].stream
-    console.log('proxying stream', queryData.stream_id)
     return stream.pipe(res)
   } else if (postData.method === 'deletesonginfo') {
-    console.log('dewleting stream', postData.stream_id)
     if (library.radioStreams[postData.stream_id]) {
-      console.log(library.radioStreams[postData.stream_id])
       if (library.radioStreams[postData.stream_id].end) {
         library.radioStreams[postData.stream_id].end()
       }
@@ -37,12 +32,10 @@ module.exports = (req, res, postData, queryData) => {
     const protocol = url.startsWith('https') ? https : http
     const request = protocol.get(url, (response) => {
       response.on('error', (error) => {
-        console.log('error', error)
+        console.log('proxy.cgi error 1', error)
       })
       response.on('data', data => {
-        console.log(data)
         const playlist = data.toString().split('\n')
-        console.log(playlist)
         const urls = []
         for (const line of playlist) {
           if (!line.startsWith('File')) {
@@ -50,7 +43,6 @@ module.exports = (req, res, postData, queryData) => {
           }
           urls.push(line.substring(line.indexOf('=') + 1))
         }
-        console.log(urls)
         const newURL = urls.pop()
         if (!newURL) {
           return res.end('{"success": false}')
@@ -63,7 +55,6 @@ module.exports = (req, res, postData, queryData) => {
             newURL,
             streamid
           }
-          console.log('created stream', url, newURL)
           return res.end(JSON.stringify({
             data: {
               format: 'mp3',
@@ -72,7 +63,7 @@ module.exports = (req, res, postData, queryData) => {
             success: true
           }))
         }).on('error', (error) => {
-          console.log(error)
+          console.log('proxy.cgi error 2', error)
         }).on('end', () => {
           delete (library.radioStreams[streamid])
         }).end()

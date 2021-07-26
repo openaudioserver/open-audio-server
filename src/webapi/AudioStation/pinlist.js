@@ -1,6 +1,6 @@
 const library = require('../../../library.js')
 
-module.exports = (req, res, postData, queryData) => {
+module.exports = (_, res, postData) => {
   res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
   if (postData.method === 'pin') {
     const items = JSON.parse(postData.items)

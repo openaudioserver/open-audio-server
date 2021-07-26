@@ -1,7 +1,6 @@
 const library = require('../../../../../library.js')
-module.exports = (req, res, postData, queryData) => {
+module.exports = (_, res, postData) => {
   res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
-  console.log('postData', postData)
   if (postData.action === 'load') {
     const info = JSON.parse(postData.audioInfos)
     const song = library.songs.filter(song => song.path === info[0].path)[0]
@@ -40,7 +39,6 @@ module.exports = (req, res, postData, queryData) => {
     return res.end(JSON.stringify(tagEditorResponse))
   } else if (postData.action === 'apply') {
     const data = JSON.parse(postData.data)
-    console.log(data)
     const song = library.songs.filter(song => song.path === data[0].audioInfos[0].path)[0]
     library.songEdits[song.path] = {
       album: data[0].album,
@@ -54,7 +52,6 @@ module.exports = (req, res, postData, queryData) => {
       disc: data[0].disc ? parseInt(data[0].disc, 10) : undefined,
       year: data[0].year ? parseInt(data[0].year, 10) : undefined
     }
-    console.log(library.songEdits)
     library.rewriteEdits()
     return res.end(JSON.stringify({
       files: data[0].audioInfos,

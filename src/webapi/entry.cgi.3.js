@@ -34,5 +34,5 @@ SYNO.SDS.Session = {
 }
 ;
 (function (name, value) {
-  const argv = arguments;	const argc = arguments.length;	const expires = (argc > 2) ? argv[2] : null;	const path = (argc > 3) ? argv[3] : '/';	const domain = (argc > 4) ? argv[4] : null;	const secure = (argc > 5) ? argv[5] : false;	document.cookie = name + '=' + escape(value) + ((expires === null) ? '' : ('; expires=' + expires.toGMTString())) + ((path === null) ? '' : ('; path=' + path)) + ((domain === null) ? '' : ('; domain=' + domain)) + ((secure === true) ? '; secure' : '')
+  const argv = arguments; const argc = arguments.length; const expires = (argc > 2) ? argv[2] : null; const path = (argc > 3) ? argv[3] : '/'; const domain = (argc > 4) ? argv[4] : null; const secure = (argc > 5) ? argv[5] : false; document.cookie = name + '=' + escape(value) + ((expires === null) ? '' : ('; expires=' + expires.toGMTString())) + ((path === null) ? '' : ('; path=' + path)) + ((domain === null) ? '' : ('; domain=' + domain)) + ((secure === true) ? '; secure' : '')
 })('id', 'p0KZoueC.MEqA1130LWN011720')

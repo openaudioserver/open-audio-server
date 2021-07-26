@@ -1,9 +1,8 @@
-const fs = require('fs')
 const library = require('../../../library.js')
 const exec = require('child_process').exec
 const util = require('util')
 
-module.exports = async (_, res, postData, queryData) => {
+module.exports = async (_, res, postData) => {
   res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
   const offset = postData.offset ? parseInt(postData.offset, 10) || 0 : 0
   if (postData.method === 'updateplaylist') {
@@ -318,7 +317,6 @@ const playCurrentTrack = util.promisify((callback) => {
   const song = library.remoteQueue[library.remoteQueueIndex]
   exec('killall -9 play')
   exec(`play -S "${song.path}" &>/tmp/open_audio_server_remote_player_position`)
-  console.log('starting song', `play -S "${song.path}" &>/tmp/open_audio_server_remote_player_position`)
   library.remoteQueuePlaying = true
   return callback()
 })

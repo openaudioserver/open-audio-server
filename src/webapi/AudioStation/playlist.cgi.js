@@ -132,6 +132,5 @@ module.exports = (req, res, postData) => {
     }
   }
   playListResponse.data.total = playListResponse.data.playlists.length
-  console.log(playListResponse)
   return res.end(JSON.stringify(playListResponse))
 }

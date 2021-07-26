@@ -13,7 +13,6 @@ module.exports = (_, res, postData) => {
   if (postData.genre) {
     const genre = library.genres.filter(genre => genre.name === postData.genre)[0]
     artistResponse.data.artists = artistResponse.data.artists.filter(artist => artist.genres.indexOf(genre) > -1)
-    console.log('filtered by grnre', genre, library.artists)
   }
   if (postData.keyword) {
     artistResponse.data.artists = artistResponse.data.artists.filter(artist => artist.name && artist.name.toLowerCase().indexOf(postData.keyword.toLowerCase()) > -1)

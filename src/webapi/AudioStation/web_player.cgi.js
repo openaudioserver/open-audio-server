@@ -110,7 +110,6 @@ module.exports = (_, res, postData) => {
           }
         } else {
           const playList = library.playLists.filter(playList => playList.id === container.id)[0]
-          console.log('smart playlist', playList, playList.additional.rules)
           for (const song of library.songs) {
             let matches = 0
             for (const rule of playList.additional.rules) {

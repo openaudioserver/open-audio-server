@@ -178,7 +178,6 @@ async function load () {
       rating: songRatings[song.path] || 0
     }
     if (songEdits[song.path]) {
-      console.log('applying song edits', songEdits[song.path])
       song.additional.song_tag.title = songEdits[song.path].title
       song.additional.song_tag.album = songEdits[song.path].album
       song.additional.song_tag.album_artist = songEdits[song.path].album_artist
@@ -189,7 +188,6 @@ async function load () {
       song.artists = songEdits[song.path].artist
       song.composers = songEdits[song.path].composer
       song.genres = songEdits[song.path].genre
-      console.log('song', song)
     }
     for (const field of ['artists', 'genres', 'composers']) {
       const value = song[field]
@@ -414,7 +412,6 @@ async function rewriteFavoriteRadios () {
 async function rewrite (name, array) {
   const dataCachePath = path.join(process.env.CACHE_PATH, process.env.GZIP ? `${name}.json.gzip` : `${name}.json`)
   const gzipAsync = util.promisify(zlib.gzip)
-  console.log(playLists)
   const compressedData = await gzipAsync(JSON.stringify(array))
   fs.writeFileSync(dataCachePath, compressedData)
 }

@@ -2,10 +2,9 @@ const https = require('https')
 const library = require('../../../library.js')
 const radioCGIJSON = require('./radio.cgi.json')
 
-module.exports = (req, res, postData, queryData) => {
+module.exports = (_, res, postData) => {
   res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
   const offset = postData.offset ? parseInt(postData.offset, 10) || 0 : 0
-  const limit = postData.limit ? parseInt(postData.limit, 10) || 0 : 0
   if (postData.method === 'add') {
     if (postData.container === 'Favorite') {
       library.favoriteRadios.push({
@@ -86,8 +85,6 @@ module.exports = (req, res, postData, queryData) => {
           },
           success: true
         }
-        console.log('data')
-        console.log(data.toString())
         const radios = JSON.parse(data)
         if (radios && radios.length) {
           for (const item of radios) {
@@ -118,8 +115,7 @@ module.exports = (req, res, postData, queryData) => {
   }
   const radioResponse = {
     data: {
-      offset,
-      radios: postData.container === 'Favorite' ? library.favoriteRadios : library.radios,
+      radios: postData.container === 'Favorite' ? library.favoriteRadios : library.radios
     },
     success: true
   }
