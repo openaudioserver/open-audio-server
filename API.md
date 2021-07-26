@@ -1,4 +1,4 @@
-The Synology API for Audio Station is a combination of routes from DSM, Synology's operating system, and Audio Station.
+The Synology API for Audio Station is a combination of routes from Synology's DSM operating system and Audio Station.
 
 | State      | Value                                                        |
 |------------|--------------------------------------------------------------|
