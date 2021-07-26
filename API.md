@@ -64,8 +64,8 @@ The Synology API for Audio Station is a combination of routes from Synology's DS
 ### Update tag information
 
     POST
-    action=apply&
-    data=<string of json> {
+    action=apply
+    &data=<string of json> {
       audioInfos: [{
         path
       }],
