@@ -13,6 +13,30 @@ library.load()
 const scanner = require('./scanner.js')
 scanner.start()
 
+if (!process.env.SYNOMAN_PATH) {
+  console.log('*** warning SYNOMAN_PATH is not defined, only the mobile apps will function')
+} else if (!fs.existsSync(process.env.SYNOMAN_PATH)) {
+  console.log('*** warning SYNOMAN_PATH does not exist, only the mobile apps will function')
+}
+
+if (!process.env.DSAUDIO_HTML_PATH) {
+  console.log('*** warning DSAUDIO_HTML_PATH is not defined, only the mobile apps will function')
+} else if (!fs.existsSync(process.env.DSAUDIO_HTML_PATH)) {
+  console.log('*** warning DSAUDIO_HTML_PATH does not exist, only the mobile apps will function')
+}
+
+if (!process.env.MUSIC_PATH) {
+  console.log('*** warning MUSIC_PATH is not defined, your library will be empty')
+} else if (!fs.existsSync(process.env.MUSIC_PATH)) {
+  console.log('*** warning MUSIC_PATH does not exist, your library will be empty')
+}
+
+if (!process.env.CACHE_PATH) {
+  console.log('*** warning CACHE_PATH is not defined, your song index, ratings etc will not save')
+} else if (!fs.existsSync(process.env.CACHE_PATH)) {
+  console.log('*** warning CACHE_PATH does not exist, your song index, ratings etc will not save')
+}
+
 function receiveRequest (req, res) {
   if (req.url === '/scan') {
     scanner.start(true)
