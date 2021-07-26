@@ -35,7 +35,6 @@ The Synology API for Audio Station is a combination of routes from Synology's DS
 | /webapi/AudioStation/stream.cgi | equivalent | GET | method, id | 
 | /webapi/AudioStation/web_player.cgi | equivalent | POST | method, songs, updated_index, containers_json, offset |
 
-
 ## /webman/3rdparty/AudioStation/tagEditorUI/tag_editor.cgi
 
 ### Retrieve tag information
@@ -61,7 +60,6 @@ The Synology API for Audio Station is a combination of routes from Synology's DS
       read_fail_count: 0,
       success: true
     }
-
 
 ### Update tag information
 
@@ -103,9 +101,13 @@ The Synology API for Audio Station is a combination of routes from Synology's DS
       write_fail_files: []
     }
 
+[Top of page](#)
+
 ## /webman/3rdparty/AudioStation/webUI/audio_search_lyrics.cgi
 
 This URL is pending implementation in Open Audio Server. That means it returns a static, successful response message to all requests.
+
+[Top of page](#)
 
 ## /webapi/AudioStation/album.cgi
 
@@ -143,6 +145,8 @@ This URL is paginated, sortable, and filters results with optional field(s).
       success
     }
 
+[Top of page](#)    
+
 ## /webapi/AudioStation/artist.cgi
 
 This URL is paginated, sortable, and filters results with optional field(s).
@@ -170,6 +174,8 @@ This URL is paginated, sortable, and filters results with optional field(s).
       },
       success
     }
+
+[Top of page](#)
 
 ## /webapi/AudioStation/composer.cgi
 
@@ -199,6 +205,7 @@ This URL is paginated, sortable, and filters results with optional field(s).
       success
     }
 
+[Top of page](#)
 
 ## /webapi/AudioStation/genre.cgi
 
@@ -227,3 +234,5 @@ This URL is paginated, sortable, and filters results with optional field(s).
       },
       success
     }
+
+[Top of page](#)
