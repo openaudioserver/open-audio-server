@@ -156,7 +156,7 @@ This URL is paginated, sortable, and filters results with optional field(s).
     POST
     genre=
     &keyword=
-    &sort_b=
+    &sort_by=
     &sort_description=
     &offset=
     &limit=
