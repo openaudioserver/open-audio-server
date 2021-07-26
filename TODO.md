@@ -15,7 +15,6 @@
 - [ ] Whatever high quality output and DSP settings do  
 - [ ] Whatever Amazon Alexa Service does  
 - [ ] Work out which "synoman" files can be deleted  
-- [ ] Add support for serving images etc embedded in themes  
 
 ### In Progress
 
@@ -36,3 +35,4 @@
 - [✓] CSS themes for dark-mode web browser interface  
 - [✓] Android app compatibility  
 - [✓] iPhone app compatibility  
+- [✓] Add support for serving images etc embedded in themes  

@@ -25,6 +25,7 @@ Aside from user accounts the goal is for complete compatibility.  Although incom
     [✓] CSS themes for dark-mode web browser interface
     [✓] Android app compatibility  
     [✓] iPhone app compatibility  
+    [✓] Add support for serving images etc embedded in themes
     [ ] Searching for DLNA servers on network  
     [ ] Browsing DLNA servers (under "Media Server")  
     [ ] Broadcasting as DLNA server
@@ -37,7 +38,6 @@ Aside from user accounts the goal is for complete compatibility.  Although incom
     [ ] Saving changes to settings and 
     [ ] Whatever Amazon Alexa Service does
     [ ] Work out which "synoman" files can be deleted  
-    [ ] Add support for serving images etc embedded in themes
 
 ## Installing Open Audio Server
 
