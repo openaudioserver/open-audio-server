@@ -4,6 +4,7 @@ const path = require('path')
 const querystring = require('querystring')
 const statCache = {}
 const bufferCache = {}
+const existsCache = {}
 
 const server = http.createServer(receiveRequest)
 server.listen(process.env.PORT || 5000, process.env.HOST || 'localhost')
@@ -29,7 +30,6 @@ function receiveRequest (req, res) {
   const urlParts = req.url.split('?')
   const queryData = querystring.parse(urlParts[1])
   if (req.method === 'GET') {
-    console.log(req.method, req.url, queryData)
     return executeRequest(req, res, {}, queryData)
   } else {
     let rawData = ''
@@ -38,7 +38,6 @@ function receiveRequest (req, res) {
     })
     req.on('end', () => {
       const postData = querystring.decode(rawData)
-      console.log(req.method, req.url, queryData, postData)
       return executeRequest(req, res, postData, queryData)
     })
   }
@@ -52,7 +51,8 @@ function executeRequest (req, res, postData, queryData) {
     urlPart = urlPart.substring(0, urlPart.indexOf('.cgi/') + '.cgi'.length)
   }
   const sourcePath = path.join(__dirname, 'src', urlPart + '.js')
-  if (fs.existsSync(sourcePath)) {
+  const sourcePathExists = existsCache[sourcePath] = existsCache[sourcePath] || fs.existsSync(sourcePath)
+  if (sourcePathExists) {
     return require(sourcePath)(req, res, postData, queryData)
   }
   let staticFilePath
@@ -64,7 +64,8 @@ function executeRequest (req, res, postData, queryData) {
   } else {
     staticFilePath = path.join(process.env.SYNOMAN_PATH, urlPart)
   }
-  if (fs.existsSync(staticFilePath)) {
+  const staticFilePathExists = existsCache[staticFilePath] = existsCache[staticFilePath] || fs.existsSync(staticFilePath)
+  if (fs.existsSync(staticFilePathExists)) {
     const stat = statCache[staticFilePath] = statCache[staticFilePath] || fs.statSync(staticFilePath)
     if (!stat.isDirectory()) {
       if (urlPart.endsWith('.html')) {
@@ -93,8 +94,9 @@ function executeRequest (req, res, postData, queryData) {
   // is mapped to the file request "/path/to/theme-folder/image.png"
   if (process.env.THEME_PATH) {
     const themeFolder = process.env.THEME_PATH.substring(0, process.env.THEME_PATH.lastIndexOf('/'))
-    const themeFile = path.join(themeFolder, urlPart)
-    if (fs.existsSync(themeFile)) {
+    const themeFilePath = path.join(themeFolder, urlPart)
+    const themeFileExists = existsCache[themeFilePath] = existsCache[themeFilePath] || fs.existsSync(themeFilePath)
+    if (themeFileExists) {
       if (urlPart.endsWith('.html')) {
         res.setHeader('content-type', 'text/html')
       } else if (urlPart.endsWith('.css')) {
@@ -104,7 +106,7 @@ function executeRequest (req, res, postData, queryData) {
       } else if (urlPart.endsWith('.js')) {
         res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
       }
-      const buffer = bufferCache[staticFilePath] = bufferCache[staticFilePath] || fs.readFileSync(staticFilePath)
+      const buffer = bufferCache[themeFilePath] = bufferCache[themeFilePath] || fs.readFileSync(themeFilePath)
       return res.end(buffer)
     }
   }

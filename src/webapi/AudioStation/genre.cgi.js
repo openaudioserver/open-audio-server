@@ -1,6 +1,7 @@
 const fs = require('fs')
 const library = require('../../../library.js')
 const path = require('path')
+const existsCache = {}
 
 module.exports = (_, res, postData) => {
   res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
@@ -13,7 +14,8 @@ module.exports = (_, res, postData) => {
     }
     for (const genre of library.genres) {
       const imagePath = path.join(process.env.SYNOMAN_PATH, `/webman/3rdparty/AudioStation/images/_2x/cover_${genre.name.toLowerCase()}.png`)
-      if (fs.existsSync(imagePath)) {
+      const exists = existsCache[imagePath] = existsCache[imagePath] || fs.existsSync(imagePath)
+      if (exists) {
         genreResponse.data.default_genres.push(genre)
       }
     }

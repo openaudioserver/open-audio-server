@@ -3,6 +3,7 @@ const library = require('../../../library.js')
 const path = require('path')
 const MusicMetaData = require('music-metadata')
 const cache = {}
+const existsCache = {}
 
 module.exports = async (_, res, _2, queryData) => {
   if (queryData.id && queryData.id.startsWith('music_')) {
@@ -24,8 +25,9 @@ module.exports = async (_, res, _2, queryData) => {
     }
     if (!song) {
       const imagePath = path.join(process.env.SYNOMAN_PATH, '/webman/3rdparty/AudioStation/images/_2x/audio_default_songs.png')
-      if (fs.existsSync(imagePath)) {
-        cache[imagePath] = {
+      const exists = existsCache[imagePath] = existsCache[imagePath] || fs.existsSync(imagePath)
+      if (exists) {
+        cache[imagePath] = cache[imagePath] || {
           format: 'image/png',
           data: fs.readFileSync(imagePath)
         }
@@ -44,8 +46,9 @@ module.exports = async (_, res, _2, queryData) => {
     }
     if (queryData.output_default) {
       const imagePath = path.join(process.env.SYNOMAN_PATH, '/webman/3rdparty/AudioStation/images/_2x/audio_default_songs.png')
-      if (fs.existsSync(imagePath)) {
-        cache[imagePath] = {
+      const exists = existsCache[imagePath] = existsCache[imagePath] || fs.existsSync(imagePath)
+      if (exists) {
+        cache[imagePath] = cache[imagePath] || {
           format: 'image/png',
           data: fs.readFileSync(imagePath)
         }
@@ -135,8 +138,9 @@ module.exports = async (_, res, _2, queryData) => {
   }
   if (queryData.default_genre_name) {
     const imagePath = path.join(process.env.SYNOMAN_PATH, `/webman/3rdparty/AudioStation/images/_2x/cover_${queryData.default_genre_name.toLowerCase()}.png`)
-    if (fs.existsSync(imagePath)) {
-      cache[imagePath] = {
+    const exists = existsCache[imagePath] = existsCache[imagePath] || fs.existsSync(imagePath)
+    if (exists) {
+      cache[imagePath] = cache[imagePath] || {
         format: 'image/png',
         data: fs.readFileSync(imagePath)
       }

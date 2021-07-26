@@ -5,7 +5,8 @@ const entryCGI2 = fs.readFileSync(path.join(__dirname, 'entry.cgi.2.js')).toStri
 const entryCGI3 = fs.readFileSync(path.join(__dirname, 'entry.cgi.3.js')).toString()
 const entryCGI4 = fs.readFileSync(path.join(__dirname, 'entry.cgi.4.js')).toString()
 const entryCGI5 = require('./entry.cgi.5.json')
-const statCache = {}
+const cache = {}
+const existsCache = {}
 
 module.exports = (req, res, postData, queryData) => {
   res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
@@ -45,21 +46,14 @@ module.exports = (req, res, postData, queryData) => {
   if (queryData.api === 'SYNO.Core.Synohdpack' && queryData.path) {
     urlPart = `/${queryData.path.replace('{0}', '256')}`
   }
-  const synomanFilePath = path.join(__dirname, 'synoman', urlPart)
-  if (fs.existsSync(synomanFilePath)) {
-    const stat = statCache[synomanFilePath] = statCache[synomanFilePath] || fs.statSync(synomanFilePath)
-    if (!stat.isDirectory()) {
-      if (urlPart.endsWith('.html')) {
-        res.setHeader('content-type', 'text/html')
-      } else if (urlPart.endsWith('.css')) {
-        res.setHeader('content-type', 'text/css')
-      } else if (urlPart.endsWith('.png')) {
-        res.setHeader('content-type', 'image/png')
-      } else if (urlPart.endsWith('.js')) {
-        res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
-      }
-      const buffer = fs.readFileSync(synomanFilePath)
-      return res.end(buffer)
+  const synomanFilePath = path.join(process.env.SYNOMAN_PATH, urlPart)
+  const exists = existsCache[synomanFilePath] = existsCache[synomanFilePath] || fs.existsSync(synomanFilePath)
+  if (exists) {
+    cache[synomanFilePath] = cache[synomanFilePath] || {
+      format: 'image/png',
+      data: fs.readFileSync(synomanFilePath)
     }
+    res.setHeader('content-type', cache[synomanFilePath].format)
+    return res.end(cache[synomanFilePath].data)
   }
 }
