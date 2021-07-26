@@ -16,11 +16,11 @@ The Synology API for Audio Station is a combination of routes from Synology's DS
 | /webapi/encryption.cgi | mimic | POST | |
 | /webapi/entry.cgi | mimic | GET+POST | |
 | /webapi/query.cgi | equivalent | POST | |
-| [/webapi/AudioStation/album.cgi](#webapiaudiostationalbum) | equivalent | POST | composer, artist, genre, keyword, sort_by, sort_direction, offset, limit |
-| [/webapi/AudioStation/artist.cgi](#webapiaudiostationartist) | equivalent | POST | genre, keyword, sort_by, sort_direction, offset, limit 
-| [/webapi/AudioStation/composer.cgi](#webapiaudiostationcomposer) | equivalent | POST | keyword, sort_by, sort_direction, offset, limit |
+| [/webapi/AudioStation/album.cgi](#webapiaudiostationalbumcgi) | equivalent | POST | composer, artist, genre, keyword, sort_by, sort_direction, offset, limit |
+| [/webapi/AudioStation/artist.cgi](#webapiaudiostationartistcgi) | equivalent | POST | genre, keyword, sort_by, sort_direction, offset, limit 
+| [/webapi/AudioStation/composer.cgi](#webapiaudiostationcomposercgi) | equivalent | POST | keyword, sort_by, sort_direction, offset, limit |
 | /webapi/AudioStation/cover.cgi | equivalent | GET | id, album_name, artist_name, composer_name, output_default, default_genre_name | 
-| [/webapi/AudioStation/genre.cgi](#webapiaudiostationgenre) | equivalent | POST | method, keyword, sort_sort_by, offset, limit |
+| [/webapi/AudioStation/genre.cgi](#webapiaudiostationgenrecgi) | equivalent | POST | method, keyword, sort_sort_by, offset, limit |
 | /webapi/AudioStation/info.cgi | mimic | POST | | 
 | /webapi/AudioStation/lyrics_search.cgi | pending | POST | |
 | /webapi/AudioStation/lyrics.cgi | pending | POST | |
