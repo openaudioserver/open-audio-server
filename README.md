@@ -1,6 +1,6 @@
 # Open Audio Server
 
-[Changelog](changelog.md) [HTTP API documentation](API.md)
+[Changelog](changelog.md) | [HTTP API documentation](API.md)
 
 Open Audio Server is a music streaming server compatible with [Audio Station](https://www.synology.com/en-us/dsm/feature/audio_station) by [Synology](www.synology.com).  Audio Station creates your own private service like Spotify for you and your family.  You store your music files on your Synology NAS and access them in web browsers on your computers or use the Synology DS Audio app available on Android and iOS marketplaces.
 
