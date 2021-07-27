@@ -81,7 +81,7 @@ module.exports = (req, res, postData) => {
     library.rewritePlayLists()
     return res.end('{ "success": true }')
   } else if (postData.method === 'rename') {
-    const playList = library.playLists.filter(playList => playList.id === postData.id)
+    const playList = library.playLists.filter(playList => playList.name === postData.id.split('/')[1])
     playList.id = `playlist_personal_normal/${postData.new_name}`
     playList.name = postData.new_name
     library.rewritePlayLists()
