@@ -306,7 +306,7 @@ This URL is used to create pinned items, rename, reorder, and unpin them.
 
 [Top of page](#)
 
-# Rename a pinned item
+### Rename a pinned item
 
     POST 
     method=rename
@@ -334,7 +334,7 @@ This URL is used to create pinned items, rename, reorder, and unpin them.
 
 [Top of page](#)
 
-# Unpin an item
+### Unpin an item
 
     POST 
     method=unpin
@@ -358,7 +358,7 @@ This URL is used to create pinned items, rename, reorder, and unpin them.
 
 [Top of page](#)
 
-# List pinned items
+### List pinned items
 
     POST 
     method=list
@@ -373,6 +373,331 @@ This URL is used to create pinned items, rename, reorder, and unpin them.
           name: "First pin"
         }]
       },
+      success: true
+    }
+
+## /webapi/AudioStation/playlist.cgi
+
+This URL is used to create create, update, delete and list "simple" and smart playlists.
+
+### Creating "simple" playlists
+
+The "simple" playlists contain songs that you add to them.
+
+    POST 
+    method=create
+    &name=
+
+    RESPONSE {
+      data: {
+        playlists: [{
+          id: 'playlist_personal_normal/My new playlist'
+        }]
+      },
+      total: 1,
+      success: true
+    }
+
+### Creating "smart" playlists
+
+The "smart" playlists apply your rules to generate a list of songs.
+
+    POST 
+    method=createsmart
+    &name=
+    &conj_rule=and|or
+    &rules_json = <string of json> [{
+        tag: 1,
+        op: 4,
+        tagval: 'part of name',
+        interval: 0
+      }]
+
+    RESPONSE {
+      data: {
+        playlists: [{
+          id: 'playlist_personal_smart/My Smart Playlist'
+        }]
+      },
+      success: true
+    }
+
+### Renaming "simple" playlists
+
+    POST
+    method=rename
+    &id=
+    &new_name=
+
+    RESPONSE {
+      data: {
+        playlists: [{
+          id: 'playlist_personal_normal/My renamed playlist'
+        }]
+      },
+      total: 1,
+      success: true
+    }
+
+### Adding songs to "simple" playlists
+
+Playlists can receive a single song, a group of songs, album, artist, composer or genre.
+
+    POST
+    method=add_track
+    &id=
+    &album=
+    &artist=
+    &composer=
+    &genre=
+
+    RESPONSE {
+      data: { 
+        id: 'playlist_personal_smart/playlist name'
+      }, 
+      success: true
+    }
+
+### Updating "smart" playlists
+
+    POST 
+    method=updatesmart
+    &id=
+    &new_name=
+    &conj_rule=and|or
+    &rules_json = <string of json> [{
+        tag: 1,
+        op: 4,
+        tagval: 'part of name',
+        interval: 0
+      }]
+
+    RESPONSE {
+      data: {
+        playlists: [{
+          id: 'playlist_personal_smart/My renamed playlist'
+        }]
+      },
+      success: true
+    }
+
+### Deleting playlists
+
+    POST 
+    method=delete
+    &id=
+
+    RESPONSE {
+      success: true
+    }
+
+### Listing playlists
+
+This result is paginated, but not filtered or sorted.
+
+    POST 
+    method=list
+
+    RESPONSE {
+      data: {
+        playlists: [{
+          id: 'playlist_personal_normal/__SYNO_AUDIO_SHARED_SONGS__',
+          name: '__SYNO_AUDIO_SHARED_SONGS__',
+          library: 'personal',
+          type: 'normal',
+          sharing_status: 'none',
+          additional: {
+            sharing_info: {
+              date_available: '0',
+              date_expired: '0',
+              id: '',
+              status: 'none',
+              url: ''
+            },
+            songs: [{}],
+            songs_offset: 0,
+            songs_total: 0
+          }
+        }, {
+          id: 'playlist_personal_normal/My Playlist',
+          name: 'My Playlist',
+          library: 'personal',
+          type: 'normal',
+          sharing_status: 'none',
+          additional: {
+            sharing_info: {
+              date_available: '0',
+              date_expired: '0',
+              id: '',
+              status: 'none',
+              url: ''
+            },
+            songs: [{}],
+            songs_offset: 0,
+            songs_total: 0
+          }
+        }, {
+          id: 'playlist_personal_smart/My Smart Playlist',
+          name: 'My Smart Playlist',
+          library: 'personal',
+          type: 'smart',
+          sharing_status: 'none',
+          additional: {
+            sharing_info: {
+              date_available: '0',
+              date_expired: '0',
+              id: '',
+              status: 'none',
+              url: ''
+            },
+            rules: [{
+              tag: 1,
+              op: 4,
+              tagval: 'part of name',
+              interval: 0
+            }],
+            rules_conjunction: 'or|and'
+          }
+        }]
+      },
+      total: 3,
+      success: true
+    }
+
+### Get a playlist's information
+
+    POST 
+    method=getinfo
+    &id=
+
+    RESPONSE {
+      data: {
+        playlists: [{
+          id: 'playlist_personal_smart/My Smart Playlist',
+          name: 'My Smart Playlist',
+          library: 'personal',
+          type: 'smart',
+          sharing_status: 'none',
+          additional: {
+            sharing_info: {
+              date_available: '0',
+              date_expired: '0',
+              id: '',
+              status: 'none',
+              url: ''
+            },
+            rules: [{
+              tag: 1,
+              op: 4,
+              tagval: 'part of name',
+              interval: 0
+            }],
+            rules_conjunction: 'or|and'
+          }
+        }]
+      },
+      total: 1,
+      success: true
+    }
+
+### Listing songs in playlists
+
+This result is paginated, but not filtered or sortable.
+
+    POST 
+    method=list
+    &id=
+    &offset=
+    &limit=
+
+    RESPONSE {
+      data: {
+        playlists: [{
+          id: 'playlist_personal_smart/My Smart Playlist',
+          name: 'My Smart Playlist',
+          library: 'personal',
+          type: 'smart',
+          sharing_status: 'none',
+          additional: {
+            sharing_info: {
+              date_available: '0',
+              date_expired: '0',
+              id: '',
+              status: 'none',
+              url: ''
+            },
+            rules: [{
+              tag: 1,
+              op: 4,
+              tagval: 'part of name',
+              interval: 0
+            }],
+            rules_conjunction: 'or|and'
+          },
+          songs: [{
+            additional: {
+              song_audio: {
+                duration: 180,
+                bitrate: 160000,
+                codec: "MPEG 1 Layer 3",
+                container: "MPEG",
+                frequency: 44100,
+                channel: 2,
+                lossless: true,
+                filesize: 123456789
+              },
+              song_tag: {
+                title: 'song title',
+                comment: 'comment value',
+                album: 'album name'
+                album_artist: 'album artist name'
+                artist: 'artist name'
+                disc: 1,
+                track: 3,
+                year: 2020
+              },
+              song_rating: {
+                rating: 3 
+              }
+            },
+            title: 'song title',
+            artist: 'artist name',
+            album: 'album name'
+          }, {
+            additional: {
+              song_audio: {
+                duration: 180,
+                bitrate: 160000,
+                codec: "MPEG 1 Layer 3",
+                container: "MPEG",
+                frequency: 44100,
+                channel: 2,
+                lossless: true,
+                filesize: 123456789
+              },
+              song_tag: {
+                title: 'song title',
+                comment: 'comment value',
+                album: 'album name'
+                album_artist: 'album artist name'
+                artist: 'artist name'
+                disc: 1,
+                track: 3,
+                year: 2020
+              },
+              song_rating: {
+                rating: 3 
+              }
+            },
+            title: 'song title',
+            artist: 'artist name',
+            album: 'album name'
+          }],
+          songs_offset: 0,
+          songs_total: 2
+        }]
+      },
+      total: 1,
       success: true
     }
 
