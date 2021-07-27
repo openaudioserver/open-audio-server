@@ -454,13 +454,13 @@ This URL receives a keyword and searches your library for albums, artists and so
 
 ## /webapi/AudioStation/radio.cgi
 
-This URL is used to add, updates personal and favorite radio stations, list SHOUTcast genres and proxy SHOUTcast radio stations.
+This URL is used to add and update personal and favorite radio stations, list radio stations, list SHOUTcast genres, and list stations within genres.
 
 ### Add a personal or favorite radio station
 
     POST 
     method=add
-    &container=Favorite
+    &container=Favorite|UserDefined
     &url=
     &title=
     &desc=
@@ -475,7 +475,7 @@ The offset is the position of the item in the station list.
 
     POST 
     method=updateradio
-    &container=Favorite
+    &container=Favorite|UserDefined
     &offset=1
     &items=<string of json> [{
       url: 'new value',
@@ -484,6 +484,24 @@ The offset is the position of the item in the station list.
     }]
 
     RESPONSE {
+      success: true
+    }
+  
+### List personal and favorite radio stations
+
+    POST 
+    method=list
+    container=Favorite|UserDefined
+  
+    RESPONSE {
+      data: {
+        radios: [{
+          id: 'server determines based on station info',
+          title: 'name',
+          type: 'station',
+          url: 'http://...'
+        }]
+      }
       success: true
     }
  
