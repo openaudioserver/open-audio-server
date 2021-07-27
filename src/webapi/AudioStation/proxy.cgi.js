@@ -2,6 +2,7 @@ const http = require('http')
 const https = require('https')
 const iceCast = require('icecast-parser')
 const library = require('../../../library.js')
+let streamNumber = 0
 
 module.exports = (req, res, postData, queryData) => {
   res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
@@ -27,7 +28,8 @@ module.exports = (req, res, postData, queryData) => {
       delete (library.radioStreams[postData.stream_id])
     }
   } else if (postData.method === 'getstreamid') {
-    const streamid = 'stream' + Math.floor(Math.random() * 1000000000)
+    streamNumber++
+    const streamid = 'stream' + streamNumber
     const url = postData.id.split(' ').pop()
     const protocol = url.startsWith('https') ? https : http
     const request = protocol.get(url, (response) => {
