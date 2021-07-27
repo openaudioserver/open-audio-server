@@ -26,13 +26,13 @@ The Synology API for Audio Station is a combination of routes from Synology's DS
 | /webapi/AudioStation/lyrics.cgi | pending | POST | |
 | [/webapi/AudioStation/pinlist.cgi](#webapiaudiostationpinlistcgi) | equivalent | POST | method, items |
 | [/webapi/AudioStation/playlist.cgi](#webapiaudiostationplaylistcgi) | equivalent | POST | method, name, new_name, songs, album, artist, composer, genre, id, rules_json |
-| /webapi/AudioStation/proxy.cgi | equivalent | GET | method, id, stream_id, |
+| [/webapi/AudioStation/proxy.cgi](#webapiaudiostationproxycgi) | equivalent | GET | method, id, stream_id, |
 | [/webapi/AudioStation/radio.cgi](#webapiaudiostationradiocgi) | equivalent | POST | method, container, url, title, desc, offset |
 | /webapi/AudioStation/remote_player_status.cgi | equivalent | POST | |
 | /webapi/AudioStation/remote_player.cgi | equivalent | POST | method, action, volume, value, songs, containers_json |
 | [/webapi/AudioStation/search.cgi](#webapiaudiostationsearchcgi) | equivalent | POST | keyword |
 | [/webapi/AudioStation/song.cgi](#webapiaudiostationsongcgi) | equivalent | POST | method, id, rating, album, composer, genre, artist, sort_by, sort_direction | 
-| /webapi/AudioStation/stream.cgi | equivalent | GET | method, id | 
+| [/webapi/AudioStation/stream.cgi](#webapiaudiostationstreamcgi) | equivalent | GET | method, id | 
 | /webapi/AudioStation/web_player.cgi | equivalent | POST | method, songs, updated_index, containers_json, offset |
 
 ## /webman/3rdparty/AudioStation/tagEditorUI/tag_editor.cgi
@@ -777,6 +777,48 @@ This URL receives a keyword and searches your library for albums, artists and so
 
 [Top of page](#)
 
+## /webapi/AudioStation/proxy.cgi
+
+This URL is used to stream and view track information of SHOUTcast radio stations.
+
+### Currently-streaming track information
+
+    URL 
+    method=getsonginfo
+    &stream_id=
+
+    RESPONSE { 
+      data: { 
+        title: "current song name" 
+      },
+      success: true 
+    }
+
+### Stream a radio station
+
+    method=getstreamid
+    &id=
+
+    RESPONSE {
+        data: {
+          format: 'mp3',
+          stream_id: streamid
+        },
+        success: true
+      }
+
+### Stop a stream
+
+    POST 
+    method=deletesonginfo
+    &stream_id=
+
+    RESPONSE { 
+      success: true 
+    }
+
+[Top of page](#)
+
 ## /webapi/AudioStation/radio.cgi
 
 This URL is used to add and update personal and favorite radio stations, list radio stations, list SHOUTcast genres, and list stations within genres.
@@ -968,3 +1010,27 @@ This URL is used to update song ratings and list songs.  This URL is paginated, 
       },
       success: true
     }
+
+[Top of page](#)
+
+## /webapi/AudioStation/stream.cgi
+
+This URL, accessed via `stream.cgi/0.mp3`, is used to stream or transcode-first an item from your library.
+
+### Transcoding files
+
+    URL
+    method=transcode
+    &id=
+
+    RESPONSE <song data>
+
+### Streaming files
+
+    URL
+    method=stream
+    &id=
+
+    RESPONSE <song data>
+
+[Top of page](#)
