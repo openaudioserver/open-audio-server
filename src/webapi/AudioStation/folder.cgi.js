@@ -1,6 +1,6 @@
 const library = require('../../../library.js')
 
-module.exports = (req, res, postData) => {
+module.exports = (_, res, postData) => {
   const offset = postData.offset ? parseInt(postData.offset, 10) || 0 : 0
   const limit = postData.limit ? parseInt(postData.limit, 10) || 0 : 0
   const folderResponse = {

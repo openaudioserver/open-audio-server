@@ -1,7 +1,7 @@
 const fs = require('fs')
 const library = require('../../../library.js')
 
-module.exports = async (_, res, postData, queryData) => {
+module.exports = async (_, res) => {
   let statusResponse
   if (!library.remoteQueuePlaying) {
     statusResponse = {

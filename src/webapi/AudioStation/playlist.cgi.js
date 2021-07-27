@@ -1,6 +1,6 @@
 const library = require('../../../library.js')
 
-module.exports = (req, res, postData) => {
+module.exports = (_, res, postData) => {
   if (postData.method === 'create') {
     const playList = {
       id: `playlist_personal_normal/${postData.name}`,

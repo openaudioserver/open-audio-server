@@ -1,6 +1,6 @@
 const library = require('../../../library.js')
 
-module.exports = (req, res, postData, queryData) => {
+module.exports = (_, res, postData) => {
   const searchResponse = {
     data: {
     },

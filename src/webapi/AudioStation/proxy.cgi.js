@@ -4,7 +4,7 @@ const iceCast = require('icecast-parser')
 const library = require('../../../library.js')
 let streamNumber = 0
 
-module.exports = (req, res, postData, queryData) => {
+module.exports = (_, res, postData, queryData) => {
   if (queryData.method === 'getsonginfo') {
     const streamid = queryData.stream_id
     const url = library.radioStreams[streamid].newURL
