@@ -130,10 +130,14 @@ function executeRequest (req, res, postData, queryData) {
       return res.end(buffer)
     }
   }
-  // files embeded in themes:
-  // /path/to/theme-folder/theme.css containing "background: url(image.png)"
-  // is mapped to the web request "/image.png"
-  // is mapped to the file request "/path/to/theme-folder/image.png"
+  // Files embeded in themes are mapped like this:
+  // "theme.css" containing "background: url(image.png)"
+  //   -> web request "/image.png"
+  //   -> file request "/path/to/theme-folder/image.png"
+  // Use a prefix to make sure you don't collide:
+  // "theme.css" containing "background: url(theme-name/image.png)"
+  //   -> web request "/theme-name/image.png"
+  //   -> file request "/path/to/theme-folder/theme-name/image.png"
   if (process.env.THEME_PATH) {
     const themeFolder = process.env.THEME_PATH.substring(0, process.env.THEME_PATH.lastIndexOf('/'))
     const themeFilePath = path.join(themeFolder, urlPart)
