@@ -118,7 +118,7 @@ module.exports = (req, res, postData) => {
     },
     success: true
   }
-  if (postData.id) {
+  if (postData.method === 'getinfo' && postData.id) {
     playListResponse.data.playlists = library.playLists.filter(playList => playList.id === postData.id)
   } else {
     playListResponse.data.playlists = library.playLists
