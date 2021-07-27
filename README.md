@@ -43,7 +43,7 @@ Aside from user accounts the goal is for complete compatibility.  Although incom
 
 ## Installing Open Audio Server
 
-You can use Docker to install the server, if you want to access the server by web browser follow the steps for [installing the web interface](#optionallysettingupthewebinterface) first to populate the "synoman" and "synohtml" folders:
+You can use Docker to install the server, if you want to access the server by web browser follow the steps for [installing the web interface](#optionally-setting-up-the-web-interface) first to populate the "synoman" and "synohtml" folders:
 
     $ docker run \
         --name open-audio-server \
