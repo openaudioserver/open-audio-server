@@ -6,7 +6,7 @@ Open Audio Server lets you use any computer to store and stream your music libra
 
 This project is not associated with Synology in any way.
 
-[Changelog](CHANGELOG.md) | [HTTP API documentation](API.md) | Download DS Audio from the [Synology website](https://www.synology.com/en-us/support/download/DS920+#androids), [Play Store](https://play.google.com/store/apps/details?id=com.synology.DSaudio) or [App Store](https://apps.apple.com/us/app/ds-audio/id321495303)
+[Changelog](CHANGELOG.md) | [API documentation](API.md) | Get DS Audio apps from the [Synology website](https://www.synology.com/en-us/support/download/DS920+#androids), [Play Store](https://play.google.com/store/apps/details?id=com.synology.DSaudio) & [App Store](https://apps.apple.com/us/app/ds-audio/id321495303)
 
 ![Screenshot of Audio Station's web browser interface by Synology](audio-station.png)
 
