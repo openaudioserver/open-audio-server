@@ -24,10 +24,10 @@ The Synology API for Audio Station is a combination of routes from Synology's DS
 | /webapi/AudioStation/info.cgi | mimic | POST | | 
 | /webapi/AudioStation/lyrics_search.cgi | pending | POST | |
 | /webapi/AudioStation/lyrics.cgi | pending | POST | |
-| /webapi/AudioStation/pinlist.cgi | equivalent | POST | method, items |
+| [/webapi/AudioStation/pinlist.cgi](#webapiaudiostationpinlistcgi) | equivalent | POST | method, items |
 | /webapi/AudioStation/playlist.cgi | equivalent | POST | method, name, new_name, songs, album, artist, composer, genre, id, rules_json |
 | /webapi/AudioStation/proxy.cgi | equivalent | GET | method, id, stream_id, |
-| /webapi/AudioStation/radio.cgi | equivalent | POST | method, container, url, title, desc, offset |
+| [/webapi/AudioStation/radio.cgi](#webapiaudiostationradiocgi) | equivalent | POST | method, container, url, title, desc, offset |
 | /webapi/AudioStation/remote_player_status.cgi | equivalent | POST | |
 | /webapi/AudioStation/remote_player.cgi | equivalent | POST | method, action, volume, value, songs, containers_json |
 | [/webapi/AudioStation/search.cgi](#webapiaudiostationsearchcgi) | equivalent | POST | keyword |
@@ -116,7 +116,8 @@ This URL is paginated, sortable, and filters results with optional field(s).
 ### Retrieves list of albums
 
     POST
-    composer=
+    action=list
+    &composer=
     &artist=
     &genre=
     &keyword=
@@ -146,7 +147,7 @@ This URL is paginated, sortable, and filters results with optional field(s).
         }]
         offset
       },
-      success
+      success: true
     }
 
 [Top of page](#)    
@@ -158,7 +159,8 @@ This URL is paginated, sortable, and filters results with optional field(s).
 ### Retrieves list of albums
 
     POST
-    genre=
+    action=list
+    &genre=
     &keyword=
     &sort_by=
     &sort_description=
@@ -176,7 +178,7 @@ This URL is paginated, sortable, and filters results with optional field(s).
         }]
         offset
       },
-      success
+      success: true
     }
 
 [Top of page](#)
@@ -188,7 +190,8 @@ This URL is paginated, sortable, and filters results with optional field(s).
 ### Retrieves list of composers
 
     POST
-    genre=
+    action=list
+    &genre=
     &keyword=
     &sort_by=
     &sort_description=
@@ -206,7 +209,7 @@ This URL is paginated, sortable, and filters results with optional field(s).
         }]
         offset
       },
-      success
+      success: true
     }
 
 [Top of page](#)
@@ -218,7 +221,8 @@ This URL is paginated, sortable, and filters results with optional field(s).
 ### Retrieves list of genres
 
     POST 
-    genre=
+    action=list
+    &genre=
     &keyword=
     &sort_by=
     &sort_description=
@@ -236,107 +240,143 @@ This URL is paginated, sortable, and filters results with optional field(s).
         }],
         offset
       },
-      success
+      success: true
     }
 
 [Top of page](#)
 
-## /webapi/AudioStation/song.cgi
+## /webapi/AudioStation/pinlist.cgi
 
-This URL is used to update song ratings and list songs.  This URL is paginated, sortable, and filters results with optional field(s).
+This URL is used to create pinned items, rename, reorder, and unpin them.
 
-### Setting a song rating
+### Create a pinned item
 
     POST 
-    method=setrating
-    &rating=3
+    method=pin
+    &items=<string of json> [{
+      genre: 'name',
+      composer: 'name',
+      artist: 'name',
+      folder: 'name'
+    }]
 
     RESPONSE {
       data: {
-        songs: [{
-          additional: {
-            song_audio: {
-              duration: 180,
-              bitrate: 160000,
-              codec: "MPEG 1 Layer 3",
-              container: "MPEG",
-              frequency: 44100,
-              channel: 2,
-              lossless: true,
-              filesize: 123456789
-            },
-            song_tag: {
-              title: 'song title',
-              comment: 'comment value',
-              album: 'album name'
-              album_artist: 'album artist name'
-              artist: 'artist name'
-              disc: 1,
-              track: 3,
-              year: 2020
-            },
-            song_rating: {
-              rating: 3 
-            }
-          },
-          title: 'song title',
-          artist: 'artist name',
-          album: 'album name'
-      }],
-      total: 1,
-      success
+        items: [{
+          id: "1",
+          name: "pinned item name"
+        }],
+        offset
+      },
+      success: true
     }
 
 [Top of page](#)
 
-### Retrieve a list of songs
+### Reorder pinned items
 
-    POST
-    album=
-    &composer=
-    &genre=
-    &artist=
-    &sort_by=
-    &sort_description=
-    &offset=
-    &limit=
+    POST 
+    method=reorder
+    &items=<string of json> [{
+        id: "2",
+        name: "Second pin"
+      },{
+        id: "3",
+        name: "Third pin"
+      },{
+        id: "1",
+        name: "First pin"
+      }]
 
     RESPONSE {
       data: {
-        songs: [{
-          additional: {
-            song_audio: {
-              duration: 180,
-              bitrate: 160000,
-              codec: "MPEG 1 Layer 3",
-              container: "MPEG",
-              frequency: 44100,
-              channel: 2,
-              lossless: true,
-              filesize: 123456789
-            },
-            song_tag: {
-              title: 'song title',
-              comment: 'comment value',
-              album: 'album name'
-              album_artist: 'album artist name'
-              artist: 'artist name'
-              disc: 1,
-              track: 3,
-              year: 2020
-            },
-            song_rating: {
-              rating: 3 
-            }
-          },
-          title: 'song title',
-          artist: 'artist name',
-          album: 'album name'
-      }]
-        offset
+        items: [{
+          id: "2",
+          name: "Second pin"
+        },{
+          id: "3",
+          name: "Third pin"
+        },{
+          id: "1",
+          name: "First pin"
+        }]
       },
-      success
+      success: true
     }
+
+[Top of page](#)
+
+# Rename a pinned item
+
+    POST 
+    method=rename
+    &name=
+    &items=<string of json> [{
+        id: "2",
+        name: "Second pin"
+      }]
+
+    RESPONSE {
+      data: {
+        items: [{
+          id: "2",
+          name: "new name value"
+        },{
+          id: "3",
+          name: "Third pin"
+        },{
+          id: "1",
+          name: "First pin"
+        }]
+      },
+      success: true
+    }
+
+[Top of page](#)
+
+# Unpin an item
+
+    POST 
+    method=unpin
+    &items=<string of json> [{
+        id: "2",
+        name: "Second pin"
+      }]
+
+    RESPONSE {
+      data: {
+        items: [{
+          id: "3",
+          name: "Third pin"
+        },{
+          id: "1",
+          name: "First pin"
+        }]
+      },
+      success: true
+    }
+
+[Top of page](#)
+
+# List pinned items
+
+    POST 
+    method=list
+
+    RESPONSE {
+      data: {
+        items: [{
+          id: "3",
+          name: "Third pin"
+        },{
+          id: "1",
+          name: "First pin"
+        }]
+      },
+      success: true
+    }
+
+[Top of page](#)
 
 ## /webapi/AudioStation/search.cgi
 
@@ -407,7 +447,181 @@ This URL receives a keyword and searches your library for albums, artists and so
         }]
         songTotal: 1
       },
-      success
+      success: true
     }
 
 [Top of page](#)
+
+## /webapi/AudioStation/radio.cgi
+
+This URL is used to add, updates personal and favorite radio stations, list SHOUTcast genres and proxy SHOUTcast radio stations.
+
+### Add a personal or favorite radio station
+
+    POST 
+    method=add
+    &container=Favorite
+    &url=
+    &title=
+    &desc=
+
+    RESPONSE {
+      success: true
+    }
+
+### Update a personal or favorite radio station
+
+The offset is the position of the item in the station list.
+
+    POST 
+    method=updateradio
+    &container=Favorite
+    &offset=1
+    &items=<string of json> [{
+      url: 'new value',
+      title: 'new value',
+      desc: 'new value
+    }]
+
+    RESPONSE {
+      success: true
+    }
+ 
+### List SHOUTcast genres
+
+    POST 
+    method=list
+    container=SHOUTcast
+  
+    RESPONSE {
+      data: {
+        radios: [{
+          id: 'server determines based on station info',
+          title: 'name',
+          type: 'station',
+          url: 'http://...'
+        }]
+      }
+      success: true
+    }
+ 
+### List SHOUTcast stations within genre
+
+Note the "Name" in the container value is any SHOUTcast genre name.
+
+    POST 
+    method=list
+    container=SHOUTcast_genre_Name
+  
+    RESPONSE {
+      data: {
+        radios: [{
+          id: 'server determines based on station info',
+          title: 'name',
+          type: 'station',
+          url: 'http://...'
+        }]
+      }
+      success: true
+    }
+
+[Top of page](#)
+
+
+## /webapi/AudioStation/song.cgi
+
+This URL is used to update song ratings and list songs.  This URL is paginated, sortable, and filters results with optional field(s).
+
+### Setting a song rating
+
+    POST 
+    method=setrating
+    &rating=3
+
+    RESPONSE {
+      data: {
+        songs: [{
+          additional: {
+            song_audio: {
+              duration: 180,
+              bitrate: 160000,
+              codec: "MPEG 1 Layer 3",
+              container: "MPEG",
+              frequency: 44100,
+              channel: 2,
+              lossless: true,
+              filesize: 123456789
+            },
+            song_tag: {
+              title: 'song title',
+              comment: 'comment value',
+              album: 'album name'
+              album_artist: 'album artist name'
+              artist: 'artist name'
+              disc: 1,
+              track: 3,
+              year: 2020
+            },
+            song_rating: {
+              rating: 3 
+            }
+          },
+          title: 'song title',
+          artist: 'artist name',
+          album: 'album name'
+      }],
+      total: 1,
+      success: true
+    }
+
+[Top of page](#)
+
+### Retrieve a list of songs
+
+    POST
+    method=list
+    &album=
+    &composer=
+    &genre=
+    &artist=
+    &sort_by=
+    &sort_description=
+    &offset=
+    &limit=
+
+    RESPONSE {
+      data: {
+        songs: [{
+          additional: {
+            song_audio: {
+              duration: 180,
+              bitrate: 160000,
+              codec: "MPEG 1 Layer 3",
+              container: "MPEG",
+              frequency: 44100,
+              channel: 2,
+              lossless: true,
+              filesize: 123456789
+            },
+            song_tag: {
+              title: 'song title',
+              comment: 'comment value',
+              album: 'album name'
+              album_artist: 'album artist name'
+              artist: 'artist name'
+              disc: 1,
+              track: 3,
+              year: 2020
+            },
+            song_rating: {
+              rating: 3 
+            }
+          },
+          title: 'song title',
+          artist: 'artist name',
+          album: 'album name'
+      }]
+        offset
+      },
+      success: true
+    }
