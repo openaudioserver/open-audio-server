@@ -1,4 +1,4 @@
 module.exports = (_, res) => {
-  res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
-  return res.end(JSON.stringify({ SynoToken: 'rpTd8mTtIbqJA', result: 'success', success: true }))
+  res.setHeader('content-type', 'text/json; charset="UTF-8"')
+  return res.end('{ "SynoToken": "rpTd8mTtIbqJA", "result": "success", "success": true }')
 }

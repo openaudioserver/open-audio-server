@@ -256,7 +256,7 @@ module.exports = (_, res, postData) => {
         }
       }
     }
-    return res.end(JSON.stringify({ success: true }))
+    return res.end('{ "success": true }')
   } else if (postData.method === 'getplaylist') {
     const playListResponse = {
       data: {

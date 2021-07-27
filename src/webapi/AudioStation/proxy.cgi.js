@@ -11,9 +11,9 @@ module.exports = (req, res, postData, queryData) => {
     const station = new iceCast.Parser({ url, autoUpdate: false })
     return station.on('metadata', (metaData) => {
       if (metaData) {
-        return res.end(JSON.stringify({ data: { title: metaData.get('StreamTitle') }, success: true }))
+        return res.end(`{ "data": { "title": "${metaData.get('StreamTitle')}" }, "success": true }`)
       } else {
-        return res.end(JSON.stringify({ data: { title: '' }, success: true }))
+        return res.end('{ "data": { "title": "" }, "success": true }')
       }
     })
   } else if (queryData.method === 'stream') {

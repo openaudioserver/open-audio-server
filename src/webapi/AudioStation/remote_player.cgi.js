@@ -258,12 +258,12 @@ module.exports = async (_, res, postData) => {
         }
       }
     }
-    return res.end(JSON.stringify({ success: true }))
+    return res.end('{ "success": true }')
   } else if (postData.method === 'control') {
     if (postData.action === 'set_volume') {
       library.remoteVolume = postData.volume
       exec(`amixer sset Master ${postData.value}%`)
-      return res.end(JSON.stringify({ success: true }))
+      return res.end('{ "success": true }')
     } else if (postData.action === 'next') {
       if (library.remoteQueueIndex < library.remoteQueue.length - 1) {
         library.remoteQueueIndex++
@@ -274,9 +274,9 @@ module.exports = async (_, res, postData) => {
       }
     } else if (postData.action === 'stop') {
       exec('killall -9 play')
-      return res.end(JSON.stringify({ success: true }))
+      return res.end('{ "success": true }')
     }
-    res.end(JSON.stringify({ success: true }))
+    return res.end('{ "success": true }')
     return playCurrentTrack()
   } else if (postData.method === 'list') {
     const remotePlayerResponse = {

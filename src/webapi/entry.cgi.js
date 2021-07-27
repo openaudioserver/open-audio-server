@@ -21,17 +21,17 @@ module.exports = (req, res, postData, queryData) => {
   } else if (postData.api === 'SYNO.Core.Desktop.Initdata' && postData.launch_app === '"SYNO.SDS.AudioStation.Application"') {
     return res.end(JSON.stringify(entryCGI5))
   } else if (postData.api === 'SYNO.Core.Desktop.Initdata' && postData.action === '"external_ip"') {
-    return res.end(JSON.stringify({ data: { external_ip: '0.0.0.0' }, success: true }))
+    return res.end('{ "data": { "external_ip": "0.0.0.0" }, "success": true }')
   } else if (postData.api === 'SYNO.Core.Desktop.Timeout') {
-    return res.end(JSON.stringify({ data: { timeout: 15 }, success: true }))
+    return res.end('{ "data": { "timeout": 15 }, "success": true }')
   } else if (postData.api === 'SYNO.FileStation.BackgroundTask' && postData.method === 'list') {
-    return res.end(JSON.stringify({ data: { offset: 0, tasks: [], total: 0 }, success: true }))
+    return res.end('{ "data": { "offset": 0, "tasks": [], "total": 0 }, "success": true }')
   } else if (postData.api === 'SYNO.Core.DataCollect.Application' && postData.app === '"SYNO.SDS.AudioStation.AppWindow"') {
-    return res.end(JSON.stringify({ success: true }))
+    return res.end('{ "success": true }')
   } else if (postData.api === 'SYNO.Core.UserSettings' && postData.method === 'apply') {
-    return res.end(JSON.stringify({ success: true }))
+    return res.end('{ "success": true }')
   } else if (postData.api === 'SYNO.Entry.Request' && postData.mode === '"parallel"') {
-    return res.end(JSON.stringify({ data: { has_fail: false, result: [{ api: 'SYNO.Core.Desktop.Timeout', method: 'check', success: true, version: 1 }] }, success: true }))
+    return res.end('{ "data": { "has_fail": false, "result": [{ "api": "SYNO.Core.Desktop.Timeout", "method": "check", "success": true, "version": 1 }] }, "success": true }')
   }
   // AudioStation pinning and playlists routes through this URL
   if (postData.api === 'SYNO.AudioStation.Pin') {
