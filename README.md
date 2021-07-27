@@ -1,12 +1,12 @@
 # Open Audio Server
 
-[Changelog](CHANGELOG.md) | [HTTP API documentation](API.md)
-
 Open Audio Server is a music streaming server compatible with [Audio Station](https://www.synology.com/en-us/dsm/feature/audio_station) by [Synology](www.synology.com).  Audio Station creates your own private service like Spotify for you and your family.  You store your music files on your Synology NAS and access them in web browsers on your computers or use the Synology DS Audio app available on Android and iOS marketplaces.
 
 Open Audio Server lets you use any computer to store and stream your music library when your Synology NAS is unavailable.  It should run on SBC ARM devices with as little as 256 MB of memory but the smallest device it has been tested on is a Raspberry Pi 2 Model B with 1024 MB of memory.
 
 This project is not associated with Synology in any way.
+
+[Changelog](CHANGELOG.md) | [HTTP API documentation](API.md) | Download DS Audio from the [Synology website](https://www.synology.com/en-us/support/download/DS920+#androids), [Play Store](https://play.google.com/store/apps/details?id=com.synology.DSaudio) or [App Store](https://apps.apple.com/us/app/ds-audio/id321495303)
 
 ![Screenshot of Audio Station's web browser interface by Synology](audio-station.png)
 
@@ -43,7 +43,7 @@ Aside from user accounts the goal is for complete compatibility.  Although incom
 
 ## Installing Open Audio Server
 
-You can use Docker to install the server.  There is more work to be done on the docker image to support remote playback and if neccessary an image for ARM too.
+You can use Docker to install the server, if you want to access the server by web browser follow the steps for [installing the web interface](#optionallysettingupthewebinterface) first to populate the "synoman" and "synohtml" folders:
 
     $ docker run \
         --name open-audio-server \
@@ -131,9 +131,9 @@ The scanner will run automatically the first time you start the server.  The nex
 
 ## Setting up the mobile apps
 
-DS Audio mobile and television apps can be downloaded from the App Store, Play Store, Amazon App Store, and Android apps are also distributed on the Synology website (select NAS DS920):
+DS Audio mobile and television apps can be downloaded from the App Store, Play Store, Amazon App Store, and Android apps are also distributed on the Synology website:
 
-    https://www.synology.com/en-us/support/download
+    https://www.synology.com/en-us/support/download/DS920+#androids
 
 When you open the apps, instead of the Synology server address you enter your computer's IP address on your home network.  There are no "user accounts" so it doesn't matter what you put in the username and password field.
 
