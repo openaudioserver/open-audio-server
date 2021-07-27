@@ -30,8 +30,8 @@ The Synology API for Audio Station is a combination of routes from Synology's DS
 | /webapi/AudioStation/radio.cgi | equivalent | POST | method, container, url, title, desc, offset |
 | /webapi/AudioStation/remote_player_status.cgi | equivalent | POST | |
 | /webapi/AudioStation/remote_player.cgi | equivalent | POST | method, action, volume, value, songs, containers_json |
-| [/webapi/AudioStation/search.cgi](#searchingsongsartistsalbums) | equivalent | POST | keyword |
-| [/webapi/AudioStation/song.cgi](#retrievealistofsongs) | equivalent | POST | method, id, rating, album, composer, genre, artist, sort_by, sort_direction | 
+| [/webapi/AudioStation/search.cgi](#webapiaudiostationsearchcgi) | equivalent | POST | keyword |
+| [/webapi/AudioStation/song.cgi](#webapiaudiostationsong.cgi) | equivalent | POST | method, id, rating, album, composer, genre, artist, sort_by, sort_direction | 
 | /webapi/AudioStation/stream.cgi | equivalent | GET | method, id | 
 | /webapi/AudioStation/web_player.cgi | equivalent | POST | method, songs, updated_index, containers_json, offset |
 
