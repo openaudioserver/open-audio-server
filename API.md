@@ -1,4 +1,8 @@
+# API documentation
+
 The Synology API for Audio Station is a combination of routes from Synology's DSM operating system and Audio Station.
+
+## Index
 
 | State | Value |
 |-------|-------|
@@ -101,13 +105,13 @@ The Synology API for Audio Station is a combination of routes from Synology's DS
       write_fail_files: []
     }
 
-[Top of page](#)
+[Top of page](#index)
 
 ## /webman/3rdparty/AudioStation/webUI/audio_search_lyrics.cgi
 
 This URL is pending implementation in Open Audio Server. That means it returns a static, successful response message to all requests.
 
-[Top of page](#)
+[Top of page](#index)
 
 ## /webapi/AudioStation/album.cgi
 
@@ -150,7 +154,7 @@ This URL is paginated, sortable, and filters results with optional field(s).
       success: true
     }
 
-[Top of page](#)    
+[Top of page](#index)    
 
 ## /webapi/AudioStation/artist.cgi
 
@@ -181,7 +185,7 @@ This URL is paginated, sortable, and filters results with optional field(s).
       success: true
     }
 
-[Top of page](#)
+[Top of page](#index)
 
 ## /webapi/AudioStation/composer.cgi
 
@@ -212,7 +216,7 @@ This URL is paginated, sortable, and filters results with optional field(s).
       success: true
     }
 
-[Top of page](#)
+[Top of page](#index)
 
 ## /webapi/AudioStation/genre.cgi
 
@@ -243,7 +247,7 @@ This URL is paginated, sortable, and filters results with optional field(s).
       success: true
     }
 
-[Top of page](#)
+[Top of page](#index)
 
 ## /webapi/AudioStation/pinlist.cgi
 
@@ -271,7 +275,7 @@ This URL is used to create pinned items, rename, reorder, and unpin them.
       success: true
     }
 
-[Top of page](#)
+[Top of page](#index)
 
 ### Reorder pinned items
 
@@ -304,7 +308,7 @@ This URL is used to create pinned items, rename, reorder, and unpin them.
       success: true
     }
 
-[Top of page](#)
+[Top of page](#index)
 
 ### Rename a pinned item
 
@@ -332,7 +336,7 @@ This URL is used to create pinned items, rename, reorder, and unpin them.
       success: true
     }
 
-[Top of page](#)
+[Top of page](#index)
 
 ### Unpin an item
 
@@ -356,7 +360,7 @@ This URL is used to create pinned items, rename, reorder, and unpin them.
       success: true
     }
 
-[Top of page](#)
+[Top of page](#index)
 
 ### List pinned items
 
@@ -701,7 +705,7 @@ This result is paginated, but not filtered or sortable.
       success: true
     }
 
-[Top of page](#)
+[Top of page](#index)
 
 ## /webapi/AudioStation/search.cgi
 
@@ -775,7 +779,7 @@ This URL receives a keyword and searches your library for albums, artists and so
       success: true
     }
 
-[Top of page](#)
+[Top of page](#index)
 
 ## /webapi/AudioStation/proxy.cgi
 
@@ -817,7 +821,7 @@ This URL is used to stream and view track information of SHOUTcast radio station
       success: true 
     }
 
-[Top of page](#)
+[Top of page](#index)
 
 ## /webapi/AudioStation/radio.cgi
 
@@ -910,7 +914,7 @@ Note the "Name" in the container value is any SHOUTcast genre name.
       success: true
     }
 
-[Top of page](#)
+[Top of page](#index)
 
 
 ## /webapi/AudioStation/song.cgi
@@ -959,7 +963,7 @@ This URL is used to update song ratings and list songs.  This URL is paginated, 
       success: true
     }
 
-[Top of page](#)
+[Top of page](#index)
 
 ### Retrieve a list of songs
 
@@ -1011,7 +1015,7 @@ This URL is used to update song ratings and list songs.  This URL is paginated, 
       success: true
     }
 
-[Top of page](#)
+[Top of page](#index)
 
 ## /webapi/AudioStation/stream.cgi
 
@@ -1033,4 +1037,4 @@ This URL, accessed via `stream.cgi/0.mp3`, is used to stream or transcode-first 
 
     RESPONSE <song data>
 
-[Top of page](#)
+[Top of page](#index)
