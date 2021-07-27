@@ -25,7 +25,7 @@ The Synology API for Audio Station is a combination of routes from Synology's DS
 | /webapi/AudioStation/lyrics_search.cgi | pending | POST | |
 | /webapi/AudioStation/lyrics.cgi | pending | POST | |
 | [/webapi/AudioStation/pinlist.cgi](#webapiaudiostationpinlistcgi) | equivalent | POST | method, items |
-| /webapi/AudioStation/playlist.cgi | equivalent | POST | method, name, new_name, songs, album, artist, composer, genre, id, rules_json |
+| [/webapi/AudioStation/playlist.cgi](#webapiaudiostationplaylistcgi) | equivalent | POST | method, name, new_name, songs, album, artist, composer, genre, id, rules_json |
 | /webapi/AudioStation/proxy.cgi | equivalent | GET | method, id, stream_id, |
 | [/webapi/AudioStation/radio.cgi](#webapiaudiostationradiocgi) | equivalent | POST | method, container, url, title, desc, offset |
 | /webapi/AudioStation/remote_player_status.cgi | equivalent | POST | |
@@ -378,7 +378,7 @@ This URL is used to create pinned items, rename, reorder, and unpin them.
 
 ## /webapi/AudioStation/playlist.cgi
 
-This URL is used to create create, update, delete and list "simple" and smart playlists.
+This URL is used to create, update, delete and list "simple" and smart playlists.
 
 ### Creating "simple" playlists
 
