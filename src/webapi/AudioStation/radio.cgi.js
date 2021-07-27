@@ -1,6 +1,6 @@
 const https = require('https')
 const library = require('../../../library.js')
-const radioCGIJSON = require('./radio.cgi.json')
+const radioCGIJSON = JSON.stringify(require('./radio.cgi.json'))
 
 module.exports = (_, res, postData) => {
   res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
@@ -52,7 +52,7 @@ module.exports = (_, res, postData) => {
     return res.end('{ "success": true }')
   }
   if (postData.container === 'SHOUTcast') {
-    return res.end(JSON.stringify(radioCGIJSON))
+    return res.end(radioCGIJSON)
   } else if (postData.container && postData.container.startsWith('SHOUTcast_genre_')) {
     const data = `genrename=${postData.container.substring('SHOUTcast_genre_'.length)}`
     const options = {
