@@ -12,6 +12,5 @@ module.exports = (req, res, postData, queryData) => {
   searchResponse.data.albumTotal = searchResponse.data.albums.length
   searchResponse.data.artistsTotal = searchResponse.data.artists.length
   searchResponse.data.songsTotal = searchResponse.data.songs.length
-  res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
   return res.end(JSON.stringify(searchResponse))
 }

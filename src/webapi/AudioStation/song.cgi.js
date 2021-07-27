@@ -100,6 +100,5 @@ module.exports = async (_, res, postData) => {
   if (limit && songResponse.data.songs.length > limit) {
     songResponse.data.songs.length = limit
   }
-  res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
   return res.end(JSON.stringify(songResponse))
 }

@@ -1,7 +1,6 @@
 const library = require('../../../library.js')
 
 module.exports = (_, res, postData) => {
-  res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
   if (postData.method === 'pin') {
     const items = JSON.parse(postData.items)
     for (const item of items) {
@@ -43,6 +42,5 @@ module.exports = (_, res, postData) => {
     },
     success: true
   }
-  res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
   return res.end(JSON.stringify(pinResponse))
 }

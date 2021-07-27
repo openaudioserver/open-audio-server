@@ -1,6 +1,5 @@
 module.exports = (_, res, postData) => {
   if (postData.api === 'SYNO.API.Encryption' && postData.method === 'getinfo' && postData.version === '1') {
-    res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
     return res.end(JSON.stringify({
       data: {
         cipherkey: '__cIpHeRtExT',

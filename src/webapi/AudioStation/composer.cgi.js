@@ -26,6 +26,5 @@ module.exports = (_, res, postData) => {
   if (limit && composerResponse.data.composers.length > limit) {
     composerResponse.data.composers.length = limit
   }
-  res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
   return res.end(JSON.stringify(composerResponse))
 }

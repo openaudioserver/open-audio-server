@@ -1,4 +1,3 @@
 module.exports = (_, res) => {
-  res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
   return res.end('{ "data": { "lyrics": "" }, "success": true }')
 }

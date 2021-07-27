@@ -1,6 +1,5 @@
 const library = require('../../../../../library.js')
 module.exports = (_, res, postData) => {
-  res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
   if (postData.action === 'load') {
     const info = JSON.parse(postData.audioInfos)
     const song = library.songs.filter(song => song.path === info[0].path)[0]

@@ -30,6 +30,5 @@ module.exports = (_, res, postData) => {
   if (limit && artistResponse.data.artists.length > limit) {
     artistResponse.data.artists.length = limit
   }
-  res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
   return res.end(JSON.stringify(artistResponse))
 }

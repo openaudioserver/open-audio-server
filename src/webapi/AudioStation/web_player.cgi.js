@@ -1,7 +1,6 @@
 const library = require('../../../library.js')
 
 module.exports = (_, res, postData) => {
-  res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
   const offset = postData.offset ? parseInt(postData.offset, 10) || 0 : 0
   if (postData.method === 'updateplaylist') {
     if (postData.songs === '') {

@@ -3,7 +3,6 @@ const exec = require('child_process').exec
 const util = require('util')
 
 module.exports = async (_, res, postData) => {
-  res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
   const offset = postData.offset ? parseInt(postData.offset, 10) || 0 : 0
   if (postData.method === 'updateplaylist') {
     if (postData.songs === '') {

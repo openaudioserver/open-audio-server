@@ -60,6 +60,5 @@ module.exports = (_, res, postData) => {
   if (limit && albumResponse.data.albums.length > limit) {
     albumResponse.data.albums.length = limit
   }
-  res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
   return res.end(JSON.stringify(albumResponse))
 }

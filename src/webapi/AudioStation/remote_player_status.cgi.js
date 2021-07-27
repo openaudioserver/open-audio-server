@@ -2,7 +2,6 @@ const fs = require('fs')
 const library = require('../../../library.js')
 
 module.exports = async (_, res, postData, queryData) => {
-  res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
   let statusResponse
   if (!library.remoteQueuePlaying) {
     statusResponse = {

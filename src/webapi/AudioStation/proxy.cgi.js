@@ -5,7 +5,6 @@ const library = require('../../../library.js')
 let streamNumber = 0
 
 module.exports = (req, res, postData, queryData) => {
-  res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
   if (queryData.method === 'getsonginfo') {
     const streamid = queryData.stream_id
     const url = library.radioStreams[streamid].newURL

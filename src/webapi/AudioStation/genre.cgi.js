@@ -4,7 +4,6 @@ const path = require('path')
 const existsCache = {}
 
 module.exports = (_, res, postData) => {
-  res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
   if (postData.method === 'list_default_genre') {
     const genreResponse = {
       data: {

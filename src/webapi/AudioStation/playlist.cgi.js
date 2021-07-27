@@ -1,7 +1,6 @@
 const library = require('../../../library.js')
 
 module.exports = (req, res, postData) => {
-  res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
   if (postData.method === 'create') {
     const playList = {
       id: `playlist_personal_normal/${postData.name}`,
