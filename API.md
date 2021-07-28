@@ -19,6 +19,7 @@ The Synology API for Audio Station is a combination of routes from Synology's DS
 | [/webapi/AudioStation/composer.cgi](#webapiaudiostationcomposercgi)                                                   | equivalent |
 | [/webapi/AudioStation/cover.cgi](#webapiaudiostationcovercgi)                                                         | equivalent |
 | [/webapi/AudioStation/genre.cgi](#webapiaudiostationgenrecgi)                                                         | equivalent |
+| [/webapi/AudioStation/folder.cgi](#webapiaudiostationfoldercgi)                                                       | equivalent |
 | [/webapi/AudioStation/lyrics_search.cgi](#webapiaudiostationlyrics_searchcgi)                                         | pending    |
 | [/webapi/AudioStation/lyrics.cgi](#webapiaudiostationlyricscgi)                                                       | pending    |
 | [/webapi/AudioStation/pinlist.cgi](#webapiaudiostationpinlistcgi)                                                     | equivalent |
@@ -176,7 +177,109 @@ This URL returns the first cover art encountered in a song within the artist or 
 
     IMAGE RESPONSE
 
-### Retrieves list of albums
+### Retrieves list of folders
+
+## /webapi/AudioStation/folder.cgi
+
+This URL is paginated, sortable, and filters results with optional field(s).
+
+### Retrieves list of folders
+
+    NODEJS await openAudioServer.Genre.listContents({ 
+      sort_by: <string>
+      sort_direction: <string>
+      offset: <integer>
+    })
+
+    POST REQUEST /webapi/AudioStation/folder.cgi
+    action=list&sort_by=&sort_direction=&offset=&limit
+
+    JSON RESPONSE {
+      data: {
+        offset: <integer>
+        total: <integer>
+        folder_total: <integer>        
+        items: [{
+          id: <string>
+          path: <string>
+          items: [{
+            id: <string>
+            is_personal: <boolean>
+            path: <string>
+            title: <string>
+            type: <string>
+          }]
+          type: <string>
+          is_persona: <boolean>
+          title: <string>
+        }]
+      }
+      success: <boolean>
+    }
+
+[Top of page](#index)
+
+### Retrieves contents of a folder
+
+    NODEJS await openAudioServer.folder.listContents({ 
+      id: <str
+      sort_by: <string>
+      sort_direction: <string>
+      offset: <integer>
+    })
+
+    POST REQUEST /webapi/AudioStation/folder.cgi
+    action=list&id=&sort_by=&sort_direction=&offset=&limit
+
+    JSON RESPONSE {
+      data: {
+        id: <string>
+        offset: <integer>
+        total: <integer>
+        folder_total: <integer>        
+        items: [{
+            id: <string>
+            is_personal: <boolean>
+            path: <string>
+            title: <string>
+            type: <string>
+          }, {
+          title: <string>
+          artist: <string>
+          album: <string>
+          additional: {
+            song_audio: {
+              duration: <integer>
+              bitrate: <integer>
+              codec: <string>
+              container: <string>
+              frequency: <integer>
+              channel: <integer>
+              lossless: <boolean>
+              filesize: <integer>
+            }
+            song_tag: {
+              title: <string>
+              comment: <string>
+              album: <string>
+              album_artist: <string>
+              artist: <string>
+              disc: <integer>
+              track: <integer>
+              year: <integer>
+            }
+            song_rating: {
+              rating: <integer>
+            }
+          }
+        }]
+      }
+      success: <boolean>
+    }
+
+[Top of page](#index)
+
+### Retrieves list of genres
 
 ## /webapi/AudioStation/genre.cgi
 
