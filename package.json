@@ -2,7 +2,7 @@
   "name": "@openaudioserver/open-audio-server",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/openaudioserver/open-audio-server"
