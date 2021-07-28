@@ -1300,7 +1300,7 @@ This URL retrieves and updates song file information.
       success: <boolean>
     }
 
-`audioInfos` array is an array of file paths.
+`audioInfos` is an array of fully-qualified file paths to the requested song(s).
 
 [Top of page](#index)
 
@@ -1360,7 +1360,7 @@ This URL retrieves and updates song file information.
       write_fail_files: [<string>]
     }
 
-`audioInfos` array is an array of file paths.
+`audioInfos` is an array of fully-qualified file paths to the requested song(s).
 
 [Top of page](#index)
 
