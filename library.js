@@ -185,9 +185,9 @@ async function load () {
       song.additional.song_tag.disc = songEdits[song.path].disc
       song.additional.song_tag.year = songEdits[song.path].year
       song.additional.song_tag.comment = songEdits[song.path].comment
-      song.artists = songEdits[song.path].artist
-      song.composers = songEdits[song.path].composer
-      song.genres = songEdits[song.path].genre
+      song.artist = songEdits[song.path].artist
+      song.composer = songEdits[song.path].composer
+      song.genre = songEdits[song.path].genre
     }
     for (const field of ['artists', 'genres', 'composers']) {
       const value = song[field]
