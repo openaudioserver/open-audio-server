@@ -1,12 +1,12 @@
 const library = require('../../../library.js')
 
 module.exports = {
-  listFolders,
+  listContents,
   httpRequest: async (_, res, postData) => {
     let response
     switch (postData.method) {
       case 'list':
-        response = await listFolders(postData)
+        response = await listContents(postData)
         break
     }
     if (response) {
@@ -17,7 +17,7 @@ module.exports = {
   }
 }
 
-async function listFolders (options) {
+async function listContents (options) {
   const offset = options.offset ? parseInt(options.offset, 10) || 0 : 0
   const limit = options.limit ? parseInt(options.limit, 10) || 0 : 0
   const response = {
