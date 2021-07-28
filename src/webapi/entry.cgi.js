@@ -37,11 +37,11 @@ module.exports = (req, res, postData, queryData) => {
   }
   // AudioStation pinning and playlists routes through this URL
   if (postData.api === 'SYNO.AudioStation.Pin') {
-    const pinlist = require('../webapi/AudioStation/pinlist.js')
-    return pinlist(req, res, postData, queryData)
+    const pinList = require('../webapi/AudioStation/pinlist.js')
+    return pinList.httpRequest(req, res, postData, queryData)
   } else if (postData.api === 'SYNO.AudioStation.Browse.Playlist') {
-    const playlist = require('../webapi/AudioStation/playlist.cgi.js')
-    return playlist(req, res, postData, queryData)
+    const playList = require('../webapi/AudioStation/playlist.cgi.js')
+    return playList.httpRequest(req, res, postData, queryData)
   }
   // map everything else to a synoman file if exists
   let urlPart = req.url.split('?')[0]

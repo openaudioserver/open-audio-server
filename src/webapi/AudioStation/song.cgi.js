@@ -1,16 +1,29 @@
 const library = require('../../../library.js')
 
-module.exports = async (_, res, postData) => {
-  if (postData.method === 'setrating') {
-    const songids = postData.id.split(',')
-    for (const songid of songids) {
-      const song = library.songs.filter(song => song.id === songid)[0]
-      song.additional.song_rating.rating = parseInt(postData.rating, 10)
+module.exports = {
+  listSongs,
+  setRating,
+  httpRequest: async (_, res, postData) => {
+    let response
+    switch (postData.method) {
+      case 'list':
+        response = await listSongs(postData)
+        break
+      case 'setrating':
+        response = await setRating(postData)
+        break
     }
-    await library.rewriteRatings()
+    if (response) {
+      return res.end(JSON.stringify(response))
+    }
+    res.statusCode = 404
+    return res.end('{ "success": false }')
   }
-  const offset = postData.offset ? parseInt(postData.offset, 10) || 0 : 0
-  const limit = postData.limit ? parseInt(postData.limit, 10) || 0 : 0
+}
+
+async function listSongs (options) {
+  const offset = options.offset ? parseInt(options.offset, 10) || 0 : 0
+  const limit = options.limit ? parseInt(options.limit, 10) || 0 : 0
   const songResponse = {
     data: {
       offset,
@@ -18,32 +31,32 @@ module.exports = async (_, res, postData) => {
     },
     success: true
   }
-  if (postData.album) {
-    songResponse.data.songs = songResponse.data.songs.filter(song => song.album === postData.album)
+  if (options.album) {
+    songResponse.data.songs = songResponse.data.songs.filter(song => song.album === options.album)
   }
-  if (postData.composer) {
-    const composer = library.composers.filter(composer => composer.name === postData.composer)[0]
+  if (options.composer) {
+    const composer = library.composers.filter(composer => composer.name === options.composer)[0]
     songResponse.data.songs = songResponse.data.songs.filter(song => song.composers.indexOf(composer) > -1)
   }
-  if (postData.genre) {
-    const genre = library.genres.filter(genre => genre.name === postData.genre)[0]
+  if (options.genre) {
+    const genre = library.genres.filter(genre => genre.name === options.genre)[0]
     songResponse.data.songs = songResponse.data.songs.filter(song => song.genres.indexOf(genre) > -1)
   }
-  if (postData.artist) {
-    const artist = library.artists.filter(artist => artist.name === postData.artist)[0]
+  if (options.artist) {
+    const artist = library.artists.filter(artist => artist.name === options.artist)[0]
     songResponse.data.songs = songResponse.data.songs.filter(song => song.artists.indexOf(artist) > -1)
   }
-  if (postData.sort_by) {
-    if (postData.sort_by === 'random') {
+  if (options.sort_by) {
+    if (options.sort_by === 'random') {
       songResponse.data.songs.sort(() => {
         return Math.random() > 0.5 ? 1 : -1
       })
     }
     for (const textField of ['title', 'artist', 'album', 'album_artist', 'comment', 'composer', 'genre']) {
-      if (postData.sort_by === textField) {
+      if (options.sort_by === textField) {
         songResponse.data.songs = songResponse.data.songs.sort((a, b) => {
           if (a[textField] && b[textField]) {
-            if (postData.sort_direction === 'ASC') {
+            if (options.sort_direction === 'ASC') {
               return a[textField].toLowerCase() > b[textField].toLowerCase() ? 1 : -1
             } else {
               return a[textField].toLowerCase() > b[textField].toLowerCase() ? -1 : 1
@@ -55,7 +68,7 @@ module.exports = async (_, res, postData) => {
           if (!b.additional || !b.additional.song_tag || !b.additional.song_tag[textField]) {
             return 1
           }
-          if (postData.sort_direction === 'ASC') {
+          if (options.sort_direction === 'ASC') {
             return a.additional.song_tag[textField].toLowerCase() > b.additional.song_tag[textField].toLowerCase() ? 1 : -1
           } else {
             return a.additional.song_tag[textField].toLowerCase() > b.additional.song_tag[textField].toLowerCase() ? -1 : 1
@@ -64,7 +77,7 @@ module.exports = async (_, res, postData) => {
       }
     }
     for (const integerField of ['duration', 'disc', 'year', 'track']) {
-      if (postData.sort_by === integerField) {
+      if (options.sort_by === integerField) {
         songResponse.data.songs = songResponse.data.songs.sort((a, b) => {
           if (!a.additional || !a.additional.song_tag) {
             return 1
@@ -72,7 +85,7 @@ module.exports = async (_, res, postData) => {
           if (!b.additional || !b.additional.song_tag) {
             return -1
           }
-          if (postData.sort_direction === 'ASC') {
+          if (options.sort_direction === 'ASC') {
             if (a.additional.song_audio[integerField]) {
               return a.additional.song_audio[integerField] > b.additional.song_audio[integerField] ? 1 : -1
             } else {
@@ -100,5 +113,15 @@ module.exports = async (_, res, postData) => {
   if (limit && songResponse.data.songs.length > limit) {
     songResponse.data.songs.length = limit
   }
-  return res.end(JSON.stringify(songResponse))
+  return songResponse
+}
+
+async function setRating (options) {
+  const songids = options.id.split(',')
+  for (const songid of songids) {
+    const song = library.songs.filter(song => song.id === songid)[0]
+    song.additional.song_rating.rating = parseInt(options.rating, 10)
+  }
+  await library.rewriteRatings()
+  return listSongs(options)
 }

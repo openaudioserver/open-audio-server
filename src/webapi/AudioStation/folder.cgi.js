@@ -1,32 +1,49 @@
 const library = require('../../../library.js')
 
-module.exports = (_, res, postData) => {
-  const offset = postData.offset ? parseInt(postData.offset, 10) || 0 : 0
-  const limit = postData.limit ? parseInt(postData.limit, 10) || 0 : 0
-  const folderResponse = {
+module.exports = {
+  listFolders,
+  httpRequest: async (_, res, postData) => {
+    let response
+    switch (postData.method) {
+      case 'list':
+        response = await listFolders(postData)
+        break
+    }
+    if (response) {
+      return res.end(JSON.stringify(response))
+    }
+    res.statusCode = 404
+    return res.end('{ "success": false }')
+  }
+}
+
+async function listFolders (options) {
+  const offset = options.offset ? parseInt(options.offset, 10) || 0 : 0
+  const limit = options.limit ? parseInt(options.limit, 10) || 0 : 0
+  const response = {
     data: {
       offset: offset || 0
     },
     success: true
   }
-  if (postData.id) {
-    const folder = Object.values(library.folders).filter(folder => folder.id === postData.id)[0]
-    folderResponse.data.items = folder.items
-    folderResponse.data.id = folder.id
+  if (options.id) {
+    const folder = Object.values(library.folders).filter(folder => folder.id === options.id)[0]
+    response.data.items = folder.items
+    response.data.id = folder.id
   } else {
     if (!library.folders[process.env.MUSIC_PATH]) {
-      folderResponse.data.items = []
-      folderResponse.data.id = 'dir_1'
+      response.data.items = []
+      response.data.id = 'dir_1'
     } else {
-      folderResponse.data.items = library.folders[process.env.MUSIC_PATH].items
-      folderResponse.data.id = library.folders[process.env.MUSIC_PATH].id
+      response.data.items = library.folders[process.env.MUSIC_PATH].items
+      response.data.id = library.folders[process.env.MUSIC_PATH].id
     }
   }
-  if (postData.sort_by) {
+  if (options.sort_by) {
     for (const integerField of ['duration', 'disc', 'year', 'track']) {
-      if (postData.sort_by === integerField) {
-        folderResponse.data.items = folderResponse.data.items.sort((a, b) => {
-          if (postData.sort_direction === 'ASC') {
+      if (options.sort_by === integerField) {
+        response.data.items = response.data.items.sort((a, b) => {
+          if (options.sort_direction === 'ASC') {
             if (a.additional.song_audio[integerField]) {
               return a.additional.song_audio[integerField] > b.additional.song_audio[integerField] ? 1 : -1
             } else {
@@ -41,30 +58,30 @@ module.exports = (_, res, postData) => {
           }
         })
       }
-      if (postData.sort_by === 'name' || postData.sort_by === 'title') {
-        folderResponse.data.items = folderResponse.data.items.sort((a, b) => {
+      if (options.sort_by === 'name' || options.sort_by === 'title') {
+        response.data.items = response.data.items.sort((a, b) => {
           return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1
         })
       }
     }
   } else {
-    folderResponse.data.items = folderResponse.data.items.sort((a, b) => {
+    response.data.items = response.data.items.sort((a, b) => {
       return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1
     })
   }
-  folderResponse.data.total = folderResponse.data.items.length
-  folderResponse.data.folder_total = folderResponse.data.items.filter(folder => folder.type === 'folder').length
-  if (limit && folderResponse.data.items.length > limit) {
-    folderResponse.data.items.length = limit
+  response.data.total = response.data.items.length
+  response.data.folder_total = response.data.items.filter(folder => folder.type === 'folder').length
+  if (limit && response.data.items.length > limit) {
+    response.data.items.length = limit
   }
-  folderResponse.data.items = JSON.parse(JSON.stringify(folderResponse.data.items))
+  response.data.items = JSON.parse(JSON.stringify(response.data.items))
   const fields = ['genres', 'items', 'composers', 'artists', 'hasImage', 'albumFolder', 'artistFolder', 'songFile', 'artist', 'album']
-  for (const item of folderResponse.data.items) {
+  for (const item of response.data.items) {
     for (const field of fields) {
       delete (item[field])
     }
   }
-  const folders = folderResponse.data.items.filter(item => item.type === 'folder')
-  folderResponse.data.folder_total = folders && folders.length ? folders.length : 0
-  return res.end(JSON.stringify(folderResponse))
+  const folders = response.data.items.filter(item => item.type === 'folder')
+  response.data.folder_total = folders && folders.length ? folders.length : 0
+  return response
 }

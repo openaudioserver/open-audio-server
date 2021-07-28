@@ -1,10 +1,29 @@
 const fs = require('fs')
 const library = require('../../../library.js')
 
-module.exports = async (_, res) => {
-  let statusResponse
+module.exports = {
+  getPlaybackInformation,
+  httpRequest: async (_, res, _2, queryData) => {
+    let response
+    switch (queryData.method) {
+      case 'getstatus':
+        response = await getPlaybackInformation()
+        break
+    }
+    if (response.buffer) {
+      res.writeHead(206, {
+        'content-type': response.contentType,
+        'content-length': response.buffer.length
+      })
+    }
+    res.statusCode = 404
+    return res.end('{ "success": false }')
+  }
+}
+
+async function getPlaybackInformation () {
   if (!library.remoteQueuePlaying) {
-    statusResponse = {
+    return {
       data: {
         index: null,
         play_mode: {
@@ -37,7 +56,7 @@ module.exports = async (_, res) => {
       }
     }
     const song = library.remoteQueue[library.remoteQueueIndex]
-    statusResponse = {
+    return {
       data: {
         index: library.remoteQueueIndex,
         play_mode: {
@@ -56,5 +75,4 @@ module.exports = async (_, res) => {
       success: true
     }
   }
-  return res.end(JSON.stringify(statusResponse))
 }

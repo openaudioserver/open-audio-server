@@ -100,7 +100,12 @@ function executeRequest (req, res, urlPath, postData, queryData) {
   const sourcePath = path.join(__dirname, 'src', urlPath + '.js')
   const sourcePathExists = existsCache[sourcePath] = existsCache[sourcePath] || fs.existsSync(sourcePath)
   if (sourcePathExists) {
-    return require(sourcePath)(req, res, postData, queryData)
+    const sourceFile = require(sourcePath)
+    if (sourceFile.httpRequest) {
+      return sourceFile.httpRequest(req, res, postData, queryData)
+    } else {
+      return sourceFile(req, res, postData, queryData)
+    }
   }
   let staticFilePath
   if (urlPath === '/dsaudio') {
