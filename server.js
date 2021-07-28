@@ -88,13 +88,16 @@ function executeRequest (req, res, urlPath, postData, queryData) {
     urlPath = urlPath.substring(0, urlPath.indexOf('.cgi/') + '.cgi'.length)
   }
   if (urlPath.endsWith('.html')) {
-    res.setHeader('content-type', 'text/html')
+    res.setHeader('content-type', 'text/html; charset="UTF-8"')
   } else if (urlPath.endsWith('.css')) {
-    res.setHeader('content-type', 'text/css')
+    res.setHeader('content-type', 'text/css; charset="UTF-8"')
   } else if (urlPath.endsWith('.png')) {
     res.setHeader('content-type', 'image/png')
-  }
-  if (urlPath.endsWith('.cgi')) {
+  } else if (urlPath.endsWith('.js')) {
+    res.setHeader('content-type', 'application/javascript; charset="UTF-8"')
+  } else if (urlPath.endsWith('.json')) {
+    res.setHeader('content-type', 'application/json; charset="UTF-8"')
+  } else if (urlPath.endsWith('.cgi')) {
     res.setHeader('content-type', 'application/json; charset="UTF-8"')
   }
   const sourcePath = path.join(__dirname, 'src', urlPath + '.js')
@@ -134,6 +137,11 @@ function executeRequest (req, res, urlPath, postData, queryData) {
       }
       return res.end(buffer)
     }
+  }
+  if (staticFilePath.startsWith(process.env.SYNOMAN_PATH)) {
+    // if (urlPath.endsWith('.css') || urlPath.endsWith('.js')) {
+    //   return res.end('')
+    // }
   }
   // Files embeded in themes are mapped like this:
   // "theme.css" containing "background: url(image.png)"
