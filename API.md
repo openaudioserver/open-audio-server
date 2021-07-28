@@ -18,8 +18,8 @@ The Synology API for Audio Station is a combination of routes from Synology's DS
 | [/webapi/AudioStation/artist.cgi](#webapiaudiostationartistcgi)                                                       | equivalent |
 | [/webapi/AudioStation/composer.cgi](#webapiaudiostationcomposercgi)                                                   | equivalent |
 | [/webapi/AudioStation/cover.cgi](#webapiaudiostationcovercgi)                                                         | equivalent |
-| [/webapi/AudioStation/genre.cgi](#webapiaudiostationgenrecgi)                                                         | equivalent |
 | [/webapi/AudioStation/folder.cgi](#webapiaudiostationfoldercgi)                                                       | equivalent |
+| [/webapi/AudioStation/genre.cgi](#webapiaudiostationgenrecgi)                                                         | equivalent |
 | [/webapi/AudioStation/lyrics_search.cgi](#webapiaudiostationlyrics_searchcgi)                                         | pending    |
 | [/webapi/AudioStation/lyrics.cgi](#webapiaudiostationlyricscgi)                                                       | pending    |
 | [/webapi/AudioStation/pinlist.cgi](#webapiaudiostationpinlistcgi)                                                     | equivalent |
